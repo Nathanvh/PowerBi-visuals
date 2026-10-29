@@ -1,12 +1,13 @@
 name: build
 
-# Push naar main        -> alle visuals bouwen, .pbiviz als download bij Actions (Artifacts)
-# Tag <visual>-v1.2.3   -> die visual bouwen en een Release maken met het .pbiviz-bestand
+# Push naar main -> alle visuals bouwen, .pbiviz als download bij Actions (Artifacts).
+# Staat het versienummer in visuals/<naam>/pbiviz.json nog niet als Release, dan wordt
+# automatisch tag <naam>-v<versie> + Release met het .pbiviz-bestand gemaakt.
 on:
   push:
     branches: [main]
-    tags: ['*-v*']
   pull_request:
+  workflow_dispatch:
 
 jobs:
   lijst:
@@ -43,22 +44,27 @@ jobs:
           path: visuals/${{ matrix.visual }}/dist/*.pbiviz
 
   release:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.event_name != 'pull_request'
     needs: bouw
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Visualnaam uit tag halen
-        id: v
-        run: echo "naam=${GITHUB_REF_NAME%-v*}" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
-          name: ${{ steps.v.outputs.naam }}
           path: bestanden
-      - name: Release maken
+      - name: Nieuwe versies als Release publiceren
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" bestanden/*.pbiviz \
-            --repo "$GITHUB_REPOSITORY" --title "$GITHUB_REF_NAME" --generate-notes
+          for dir in visuals/*/; do
+            v=$(basename "$dir")
+            versie=$(jq -r '.visual.version' "$dir/pbiviz.json" | sed 's/\.0$//')
+            tag="$v-v$versie"
+            if gh release view "$tag" >/dev/null 2>&1; then
+              echo "$tag bestaat al, overslaan"
+            else
+              gh release create "$tag" bestanden/"$v"/*.pbiviz --target "$GITHUB_SHA" --title "$tag" --generate-notes
+            fi
+          done

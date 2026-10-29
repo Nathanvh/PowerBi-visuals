@@ -22,8 +22,9 @@ Nieuwe versie van een bestaande visual: importeer het bestand opnieuw en bevesti
 ## Werkwijze voor wijzigingen
 
 - Wijzigingen gaan naar `main`. Elke push bouwt alle visuals (GitHub Actions).
-- Een versie uitbrengen: verhoog het versienummer in `visuals/<naam>/pbiviz.json` (`visual.version` en `version`) en maak een tag
-  `<naam>-v<versie>`, bijvoorbeeld `kpikaart-v1.0.2`. De workflow maakt dan een Release met het `.pbiviz`-bestand.
+- Een versie uitbrengen: verhoog het versienummer in `visuals/<naam>/pbiviz.json` (`visual.version` en `version`, vier delen, bijvoorbeeld `1.0.2.0`).
+  Na de push maakt de workflow zelf de tag `<naam>-v<versie>` (bijvoorbeeld `kpikaart-v1.0.2`) en een Release met het `.pbiviz`-bestand.
+  Is de versie niet verhoogd, dan wordt er alleen gebouwd en geen Release gemaakt.
 - Lokaal bouwen: `cd visuals/<naam> && npm ci && npx pbiviz package` (bestand komt in `dist/`).
 
 ## Een nieuwe visual toevoegen
