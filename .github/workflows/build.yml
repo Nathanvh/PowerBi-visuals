@@ -1,0 +1,64 @@
+name: build
+
+# Push naar main        -> alle visuals bouwen, .pbiviz als download bij Actions (Artifacts)
+# Tag <visual>-v1.2.3   -> die visual bouwen en een Release maken met het .pbiviz-bestand
+on:
+  push:
+    branches: [main]
+    tags: ['*-v*']
+  pull_request:
+
+jobs:
+  lijst:
+    runs-on: ubuntu-latest
+    outputs:
+      visuals: ${{ steps.m.outputs.visuals }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "visuals=$(ls -d visuals/*/ | xargs -n1 basename | jq -R . | jq -sc .)" >> "$GITHUB_OUTPUT"
+
+  bouw:
+    needs: lijst
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        visual: ${{ fromJson(needs.lijst.outputs.visuals) }}
+    defaults:
+      run:
+        working-directory: visuals/${{ matrix.visual }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: visuals/${{ matrix.visual }}/package-lock.json
+      - run: npm ci
+      - run: npx pbiviz package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.visual }}
+          path: visuals/${{ matrix.visual }}/dist/*.pbiviz
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: bouw
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Visualnaam uit tag halen
+        id: v
+        run: echo "naam=${GITHUB_REF_NAME%-v*}" >> "$GITHUB_OUTPUT"
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.v.outputs.naam }}
+          path: bestanden
+      - name: Release maken
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" bestanden/*.pbiviz \
+            --repo "$GITHUB_REPOSITORY" --title "$GITHUB_REF_NAME" --generate-notes

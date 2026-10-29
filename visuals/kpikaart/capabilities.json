@@ -1,0 +1,79 @@
+{
+  "dataRoles": [
+    { "displayName": "Waarde", "name": "waarde", "kind": "Measure" },
+    { "displayName": "Toelichting (tekst)", "name": "toelichting", "kind": "Measure" },
+    { "displayName": "Accentkleur (hex-tekst)", "name": "kleur", "kind": "Measure" }
+  ],
+  "objects": {
+    "kaart": {
+      "displayName": "Kaart",
+      "properties": {
+        "achtergrond": { "displayName": "Achtergrond", "type": { "fill": { "solid": { "color": true } } } },
+        "randKleur": { "displayName": "Randkleur", "type": { "fill": { "solid": { "color": true } } } },
+        "randRadius": { "displayName": "Hoekradius (px)", "type": { "numeric": true } },
+        "paddingBoven": { "displayName": "Padding boven/onder (px)", "type": { "numeric": true } },
+        "paddingZij": { "displayName": "Padding links/rechts (px)", "type": { "numeric": true } },
+        "afbreken": { "displayName": "Tekst afbreken", "type": { "bool": true } },
+        "uitlijning": { "displayName": "Uitlijning", "type": { "enumeration": [ { "value": "left", "displayName": "Links" }, { "value": "center", "displayName": "Midden" }, { "value": "right", "displayName": "Rechts" } ] } }
+      }
+    },
+    "accent": {
+      "displayName": "Accentbalk",
+      "properties": {
+        "toon": { "displayName": "Tonen", "type": { "bool": true } },
+        "standaardKleur": { "displayName": "Standaardkleur", "type": { "fill": { "solid": { "color": true } } } },
+        "hoogte": { "displayName": "Hoogte (px)", "type": { "numeric": true } }
+      }
+    },
+    "label": {
+      "displayName": "Label",
+      "properties": {
+        "tekst": { "displayName": "Tekst", "type": { "text": true } },
+        "grootte": { "displayName": "Tekstgrootte (pt)", "type": { "numeric": true } },
+        "kleur": { "displayName": "Kleur", "type": { "fill": { "solid": { "color": true } } } },
+        "vet": { "displayName": "Vet", "type": { "bool": true } },
+        "regelhoogte": { "displayName": "Regelhoogte (x)", "type": { "numeric": true } },
+        "ruimteOnder": { "displayName": "Ruimte eronder (px)", "type": { "numeric": true } }
+      }
+    },
+    "waarde": {
+      "displayName": "Waarde",
+      "properties": {
+        "grootte": { "displayName": "Tekstgrootte (pt)", "type": { "numeric": true } },
+        "kleur": { "displayName": "Kleur", "type": { "fill": { "solid": { "color": true } } } },
+        "regelhoogte": { "displayName": "Regelhoogte (x)", "type": { "numeric": true } },
+        "ruimteOnder": { "displayName": "Ruimte eronder (px)", "type": { "numeric": true } }
+      }
+    },
+    "toelichting": {
+      "displayName": "Toelichting",
+      "properties": {
+        "toon": { "displayName": "Tonen", "type": { "bool": true } },
+        "grootte": { "displayName": "Tekstgrootte (pt)", "type": { "numeric": true } },
+        "kleur": { "displayName": "Kleur", "type": { "fill": { "solid": { "color": true } } } },
+        "regelhoogte": { "displayName": "Regelhoogte (x)", "type": { "numeric": true } }
+      }
+    },
+    "lettertype": {
+      "displayName": "Lettertype",
+      "properties": {
+        "familie": { "displayName": "Lettertype", "type": { "text": true } }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "conditions": [ { "waarde": { "max": 1 }, "toelichting": { "max": 1 }, "kleur": { "max": 1 } } ],
+      "categorical": {
+        "values": {
+          "select": [
+            { "bind": { "to": "waarde" } },
+            { "bind": { "to": "toelichting" } },
+            { "bind": { "to": "kleur" } }
+          ]
+        }
+      }
+    }
+  ],
+  "privileges": []
+}

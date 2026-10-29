@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "kpikaart",
+    "displayName": "KPI-kaart 3CX",
+    "guid": "kpikaart3cx7a1c2d4e9f0b4a6c8e1d2f3a4b5c6d7e",
+    "visualClassName": "Visual",
+    "version": "1.0.1.0",
+    "description": "KPI-kaart in de huisstijl van de 3CX-rapportage",
+    "supportUrl": "https://www.bevico.nl",
+    "gitHubUrl": ""
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "Bevico",
+    "email": "nathanvh95@gmail.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.1.0"
+}

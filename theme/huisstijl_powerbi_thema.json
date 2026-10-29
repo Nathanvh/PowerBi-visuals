@@ -1,0 +1,83 @@
+{
+  "name": "Huisstijl 3CX rapportage",
+  "dataColors": ["#111987", "#dd7d32", "#66cccc", "#3650ff", "#31959b", "#c1561e", "#9fb4ff", "#525252"],
+  "background": "#FFFFFF",
+  "foreground": "#262626",
+  "tableAccent": "#111987",
+  "good": "#039654",
+  "neutral": "#f78f08",
+  "bad": "#d92d20",
+  "maximum": "#111987",
+  "center": "#9fb4ff",
+  "minimum": "#e9f1ff",
+  "null": "#D4D4D4",
+  "textClasses": {
+    "callout": { "fontSize": 24, "fontFace": "Montserrat", "color": "#111987" },
+    "title": { "fontSize": 12, "fontFace": "Montserrat", "color": "#111987" },
+    "header": { "fontSize": 10, "fontFace": "Montserrat", "color": "#111987" },
+    "label": { "fontSize": 9, "fontFace": "Montserrat", "color": "#525252" }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [
+          {
+            "show": true,
+            "fontColor": { "solid": { "color": "#111987" } },
+            "fontFamily": "Montserrat",
+            "fontSize": 12,
+            "bold": true
+          }
+        ],
+        "background": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#FFFFFF" } },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#E5E5E5" } },
+            "radius": 8
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": { "solid": { "color": "#FAFAFA" } },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "columnHeaders": [
+          {
+            "fontColor": { "solid": { "color": "#111987" } },
+            "backColor": { "solid": { "color": "#FFFFFF" } },
+            "fontFamily": "Montserrat",
+            "bold": true
+          }
+        ]
+      }
+    },
+    "pivotTable": {
+      "*": {
+        "columnHeaders": [
+          {
+            "fontColor": { "solid": { "color": "#111987" } },
+            "backColor": { "solid": { "color": "#FFFFFF" } },
+            "fontFamily": "Montserrat",
+            "bold": true
+          }
+        ]
+      }
+    }
+  }
+}
