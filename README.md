@@ -19,6 +19,19 @@ zonder dat ze opnieuw uitgelegd hoeven te worden.
 
 Nieuwe versie van een bestaande visual: importeer het bestand opnieuw en bevestig dat de oude wordt vervangen.
 
+### Ophalen op een server (PowerShell)
+
+`scripts/deploy.ps1` haalt de nieuwste Release(s) op en zet het `.pbiviz`-bestand in een map (standaard `.\pbiviz`).
+
+```powershell
+$env:GITHUB_TOKEN = '<token met leesrechten op Contents>'   # nodig omdat de repo private is
+.\deploy.ps1                                  # alle visuals, nieuwste versie
+.\deploy.ps1 -Visual kpikaart -Doel D:\PowerBI\visuals
+.\deploy.ps1 -Visual kpikaart -Versie 1.0.1  # een specifieke versie
+```
+
+Per visual ontstaat `<naam>-<versie>.pbiviz` en een kopie `<naam>.pbiviz` met een vaste naam.
+
 ## Werkwijze voor wijzigingen
 
 - Wijzigingen gaan naar `main`. Elke push bouwt alle visuals (GitHub Actions).
