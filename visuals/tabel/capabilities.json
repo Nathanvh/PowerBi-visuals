@@ -1,0 +1,203 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Kolommen",
+      "name": "kolommen",
+      "kind": "GroupingOrMeasure"
+    }
+  ],
+  "objects": {
+    "tekst": {
+      "displayName": "Tekst",
+      "properties": {
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Kleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "rijPadding": {
+          "displayName": "Rij-padding boven/onder (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kolomRuimte": {
+          "displayName": "Ruimte tussen kolommen (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "scheiding": {
+          "displayName": "Kleur rijlijn",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "zebra": {
+          "displayName": "Om-en-om rijkleur",
+          "type": {
+            "bool": true
+          }
+        },
+        "zebraKleur": {
+          "displayName": "Kleur om-en-om",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "sorteren": {
+          "displayName": "Sorteren door op kop te klikken",
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "kop": {
+      "displayName": "Kolomkoppen",
+      "properties": {
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Kleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "vet": {
+          "displayName": "Vet",
+          "type": {
+            "bool": true
+          }
+        },
+        "lijnKleur": {
+          "displayName": "Kleur onderlijn",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "lijnDikte": {
+          "displayName": "Dikte onderlijn (px)",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "totaal": {
+      "displayName": "Totaalrij",
+      "properties": {
+        "toon": {
+          "displayName": "Tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "label": {
+          "displayName": "Label",
+          "type": {
+            "text": true
+          }
+        },
+        "uitsluiten": {
+          "displayName": "Kolommen zonder totaal (namen, komma; %-kolommen sowieso niet)",
+          "type": {
+            "text": true
+          }
+        }
+      }
+    },
+    "opmaak": {
+      "displayName": "Speciale kolommen",
+      "properties": {
+        "mmss": {
+          "displayName": "Kolommen als m:ss (namen, komma; waarde in seconden)",
+          "type": {
+            "text": true
+          }
+        },
+        "databalk": {
+          "displayName": "Kolom met databalk (naam)",
+          "type": {
+            "text": true
+          }
+        },
+        "databalkKleur": {
+          "displayName": "Kleur databalk",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "statusKleuren": {
+          "displayName": "Statuskleuren (Tekst=#kleur; gescheiden door ;)",
+          "type": {
+            "text": true
+          }
+        }
+      }
+    },
+    "lettertype": {
+      "displayName": "Lettertype",
+      "properties": {
+        "familie": {
+          "displayName": "Lettertype",
+          "type": {
+            "text": true
+          }
+        }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "table": {
+        "rows": {
+          "for": {
+            "in": "kolommen"
+          },
+          "dataReductionAlgorithm": {
+            "window": {
+              "count": 1000
+            }
+          }
+        }
+      }
+    }
+  ],
+  "privileges": []
+}

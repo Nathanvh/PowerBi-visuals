@@ -1,0 +1,275 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Categorie (as)",
+      "name": "categorie",
+      "kind": "Grouping"
+    },
+    {
+      "displayName": "Kolommen (1 of meer measures)",
+      "name": "waarden",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Lijn (measure)",
+      "name": "lijn",
+      "kind": "Measure"
+    }
+  ],
+  "objects": {
+    "algemeen": {
+      "displayName": "Algemeen",
+      "properties": {
+        "modus": {
+          "displayName": "Kolommen",
+          "type": {
+            "enumeration": [
+              {
+                "value": "gestapeld",
+                "displayName": "Gestapeld"
+              },
+              {
+                "value": "gegroepeerd",
+                "displayName": "Naast elkaar"
+              }
+            ]
+          }
+        },
+        "legenda": {
+          "displayName": "Legenda tonen",
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "kolommen": {
+      "displayName": "Kolommen",
+      "properties": {
+        "breedte": {
+          "displayName": "Breedte (0-1)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "radius": {
+          "displayName": "Hoekradius (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "labels": {
+          "displayName": "Waarden tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "mmss": {
+          "displayName": "Waarden als m:ss (seconden)",
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "lijn": {
+      "displayName": "Lijn",
+      "properties": {
+        "kleur": {
+          "displayName": "Kleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "dikte": {
+          "displayName": "Dikte (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "punten": {
+          "displayName": "Punten tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "labels": {
+          "displayName": "Waarden tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "mmss": {
+          "displayName": "Waarden als m:ss (seconden)",
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "reeks": {
+      "displayName": "Kleuren van kolommen",
+      "properties": {
+        "k1": {
+          "displayName": "Reeks 1",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "k2": {
+          "displayName": "Reeks 2",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "k3": {
+          "displayName": "Reeks 3",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "k4": {
+          "displayName": "Reeks 4",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "k5": {
+          "displayName": "Reeks 5",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "k6": {
+          "displayName": "Reeks 6",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "assen": {
+      "displayName": "Assen",
+      "properties": {
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Tekstkleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "raster": {
+          "displayName": "Rasterlijnen tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "rasterKleur": {
+          "displayName": "Kleur rasterlijnen",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "toonY": {
+          "displayName": "Waardeas tonen",
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "lettertype": {
+      "displayName": "Lettertype",
+      "properties": {
+        "familie": {
+          "displayName": "Lettertype",
+          "type": {
+            "text": true
+          }
+        }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "conditions": [
+        {
+          "categorie": {
+            "max": 1
+          },
+          "lijn": {
+            "max": 1
+          }
+        }
+      ],
+      "categorical": {
+        "categories": {
+          "for": {
+            "in": "categorie"
+          },
+          "dataReductionAlgorithm": {
+            "window": {
+              "count": 500
+            }
+          }
+        },
+        "values": {
+          "select": [
+            {
+              "for": {
+                "in": "waarden"
+              }
+            },
+            {
+              "bind": {
+                "to": "lijn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "privileges": []
+}

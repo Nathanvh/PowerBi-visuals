@@ -6,9 +6,31 @@ zonder dat ze opnieuw uitgelegd hoeven te worden.
 
 ## Visuals
 
-| Map | Visual | Doel |
+Gedeelde huisstijlcode (kleuren, opmaak, m:ss, kleurverloop) staat in `shared/huisstijl.ts` en wordt door alle visuals gebruikt.
+
+| Map | Visual in Power BI | Gebruik in de dashboards |
 |---|---|---|
-| `visuals/kpikaart` | KPI-kaart 3CX | Kaart met label, waarde, toelichting en gekleurde accentbalk (vervangt de standaard New card) |
+| `visuals/paginatitel` | Paginatitel 3CX | Titel, ondertitel en oranje lijn bovenaan elke pagina (1232 x 80) |
+| `visuals/kpikaart` | KPI-kaart 3CX | De grote kaarten (165 x 108) en, met Indeling *Compact*, de kleine kaarten (299 x 64) |
+| `visuals/slicer` | Slicer tegels 3CX | Entiteit, Wachtrij, Weekdag, Medewerker (tegels, meerdere selecteren, Alles-tegel) |
+| `visuals/datumslicer` | Datumslicer 3CX | Datum: *Eén dag* (met vorige/volgende, dashboard 2) of *Bereik* (dashboard 1) |
+| `visuals/grafiek` | Kolom- en lijngrafiek 3CX | Gestapelde kolommen per dag, lijn voor wachttijd, wachtklasse-grafiek |
+| `visuals/heatmap` | Heatmap 3CX | Weekdag x uur (wachtrij) en medewerker x uur; cellen vullen de hele visual |
+| `visuals/tabel` | Tabel 3CX | Gemiste gesprekken, opnamegedrag (databalk), detailtabel, per-wachtrij-tabel met totaalrij |
+
+Niet vervangen (blijft standaard Power BI): de uitklapbare matrix "Wie nam wat op" (hiërarchie met uitklappen).
+
+### Velden per visual
+
+- **Paginatitel:** *Titel* en *Ondertitel* als tekst-measure, of vaste tekst bij Format visual.
+- **KPI-kaart:** *Waarde* (measure), *Toelichting* (tekst-measure, optioneel), *Accentkleur* (measure met hexcode, optioneel).
+- **Slicer tegels / Datumslicer:** één veld. De visual stuurt zelf een filter naar de andere visuals op de pagina.
+- **Kolom- en lijngrafiek:** *Categorie (as)*, *Kolommen* (één of meer measures, bijvoorbeeld Opgenomen, Terugbel, Gemist), *Lijn* (één measure, komt op een tweede as als er ook kolommen zijn).
+- **Heatmap:** *Rijen*, *Kolommen*, *Waarde*.
+- **Tabel:** alle kolommen in *Kolommen*. Speciale kolommen via Format visual, *Speciale kolommen* (m:ss, databalk, statuskleuren).
+
+Bekende beperkingen: een custom visual kan niet buiten zijn eigen vlak tekenen, dus slicers zijn tegels en geen uitklapmenu.
+Interactie (klikken in een grafiek om andere visuals te filteren) en tooltips van Power BI zelf zitten er niet in; wel eenvoudige hover-tekst.
 
 ## Downloaden en installeren
 

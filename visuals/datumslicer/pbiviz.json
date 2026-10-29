@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "datumslicer",
+    "displayName": "Datumslicer 3CX",
+    "guid": "datumslicer3cx9e1a2c4b6d8f4a0c2e4a6c8e0a2b4d6f",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "Datumslicer in de huisstijl: een dag (met vorige/volgende) of een bereik, met snelkeuzes",
+    "supportUrl": "https://www.bevico.nl",
+    "gitHubUrl": ""
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "Bevico",
+    "email": "nathanvh95@gmail.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.0.0"
+}

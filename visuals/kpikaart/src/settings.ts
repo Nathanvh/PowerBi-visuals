@@ -18,6 +18,14 @@ class KaartCard extends Card {
     paddingBoven = num("paddingBoven", "Padding boven/onder (px)", 12);
     paddingZij = num("paddingZij", "Padding links/rechts (px)", 12);
     afbreken = new formattingSettings.ToggleSwitch({ name: "afbreken", displayName: "Tekst afbreken", value: true });
+    indeling = new formattingSettings.ItemDropdown({
+        name: "indeling", displayName: "Indeling",
+        items: [
+            { value: "standaard", displayName: "Standaard (onder elkaar)" },
+            { value: "compact", displayName: "Compact (waarde rechts)" }
+        ],
+        value: { value: "standaard", displayName: "Standaard (onder elkaar)" }
+    });
     uitlijning = new formattingSettings.ItemDropdown({
         name: "uitlijning", displayName: "Uitlijning",
         items: [
@@ -29,7 +37,7 @@ class KaartCard extends Card {
     });
     name = "kaart";
     displayName = "Kaart";
-    slices: Slice[] = [this.achtergrond, this.randKleur, this.randRadius, this.paddingBoven, this.paddingZij, this.afbreken, this.uitlijning];
+    slices: Slice[] = [this.achtergrond, this.randKleur, this.randRadius, this.paddingBoven, this.paddingZij, this.afbreken, this.indeling, this.uitlijning];
 }
 
 class AccentCard extends Card {

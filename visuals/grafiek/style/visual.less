@@ -1,0 +1,9 @@
+.grafiek { box-sizing: border-box; width: 100%; height: 100%; overflow: hidden; display: flex; flex-direction: column;
+  .legenda { flex: none; display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 0 0 6px; }
+  .item { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .blok { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .lijnteken { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+  .vlak { flex: 1 1 auto; min-height: 0; }
+  svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  text { font-variant-numeric: tabular-nums; }
+}

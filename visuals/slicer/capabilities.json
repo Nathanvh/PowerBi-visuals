@@ -1,0 +1,208 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Veld",
+      "name": "veld",
+      "kind": "Grouping"
+    }
+  ],
+  "objects": {
+    "label": {
+      "displayName": "Label",
+      "properties": {
+        "toon": {
+          "displayName": "Tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "tekst": {
+          "displayName": "Tekst (leeg = veldnaam)",
+          "type": {
+            "text": true
+          }
+        },
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Kleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "vet": {
+          "displayName": "Vet",
+          "type": {
+            "bool": true
+          }
+        },
+        "ruimteOnder": {
+          "displayName": "Ruimte eronder (px)",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "tegels": {
+      "displayName": "Tegels",
+      "properties": {
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Tekstkleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "achtergrond": {
+          "displayName": "Achtergrond",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "rand": {
+          "displayName": "Randkleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "radius": {
+          "displayName": "Hoekradius (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "hoogte": {
+          "displayName": "Hoogte (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "paddingZij": {
+          "displayName": "Padding links/rechts (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "ruimte": {
+          "displayName": "Ruimte tussen tegels (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "meerdere": {
+          "displayName": "Meerdere selecteren",
+          "type": {
+            "bool": true
+          }
+        },
+        "toonAlles": {
+          "displayName": "Alles-tegel tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "allesTekst": {
+          "displayName": "Tekst Alles-tegel",
+          "type": {
+            "text": true
+          }
+        }
+      }
+    },
+    "gekozen": {
+      "displayName": "Geselecteerde tegel",
+      "properties": {
+        "achtergrond": {
+          "displayName": "Achtergrond",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "kleur": {
+          "displayName": "Tekstkleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "lettertype": {
+      "displayName": "Lettertype",
+      "properties": {
+        "familie": {
+          "displayName": "Lettertype",
+          "type": {
+            "text": true
+          }
+        }
+      }
+    },
+    "general": {
+      "properties": {
+        "filter": {
+          "type": {
+            "filter": true
+          }
+        }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "conditions": [
+        {
+          "veld": {
+            "max": 1
+          }
+        }
+      ],
+      "categorical": {
+        "categories": {
+          "for": {
+            "in": "veld"
+          },
+          "dataReductionAlgorithm": {
+            "window": {
+              "count": 500
+            }
+          }
+        }
+      }
+    }
+  ],
+  "privileges": []
+}

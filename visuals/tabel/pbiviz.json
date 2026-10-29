@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "tabel",
+    "displayName": "Tabel 3CX",
+    "guid": "tabel3cx6b8d0f2a4c6e4a8c0e2a4c6e8a0c2e4b6",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "Tabel in de huisstijl met totaalrij, databalk, m:ss-kolommen en statuskleuren",
+    "supportUrl": "https://www.bevico.nl",
+    "gitHubUrl": ""
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "Bevico",
+    "email": "nathanvh95@gmail.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.0.0"
+}

@@ -1,0 +1,249 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Rijen",
+      "name": "rij",
+      "kind": "Grouping"
+    },
+    {
+      "displayName": "Kolommen",
+      "name": "kolom",
+      "kind": "Grouping"
+    },
+    {
+      "displayName": "Waarde",
+      "name": "waarde",
+      "kind": "Measure"
+    }
+  ],
+  "objects": {
+    "kleuren": {
+      "displayName": "Kleuren",
+      "properties": {
+        "laag": {
+          "displayName": "Laag",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "midden": {
+          "displayName": "Midden",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "hoog": {
+          "displayName": "Hoog",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "leeg": {
+          "displayName": "Lege cel",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "tekstDonker": {
+          "displayName": "Tekst op lichte cel",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "tekstLicht": {
+          "displayName": "Tekst op donkere cel",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "drempel": {
+          "displayName": "Wisselpunt tekstkleur (0-1)",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "cellen": {
+      "displayName": "Cellen",
+      "properties": {
+        "toonWaarden": {
+          "displayName": "Waarden tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "vet": {
+          "displayName": "Vet",
+          "type": {
+            "bool": true
+          }
+        },
+        "ruimte": {
+          "displayName": "Ruimte tussen cellen (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "radius": {
+          "displayName": "Hoekradius (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "nullAlsLeeg": {
+          "displayName": "0 tonen als leeg",
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "koppen": {
+      "displayName": "Koppen",
+      "properties": {
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Kleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "vet": {
+          "displayName": "Vet",
+          "type": {
+            "bool": true
+          }
+        },
+        "rijkopBreedte": {
+          "displayName": "Breedte rijkop (px, 0 = automatisch)",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "legenda": {
+      "displayName": "Legenda",
+      "properties": {
+        "toon": {
+          "displayName": "Tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Kleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "lettertype": {
+      "displayName": "Lettertype",
+      "properties": {
+        "familie": {
+          "displayName": "Lettertype",
+          "type": {
+            "text": true
+          }
+        }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "conditions": [
+        {
+          "rij": {
+            "max": 1
+          },
+          "kolom": {
+            "max": 1
+          },
+          "waarde": {
+            "max": 1
+          }
+        }
+      ],
+      "matrix": {
+        "rows": {
+          "for": {
+            "in": "rij"
+          },
+          "dataReductionAlgorithm": {
+            "window": {
+              "count": 500
+            }
+          }
+        },
+        "columns": {
+          "for": {
+            "in": "kolom"
+          },
+          "dataReductionAlgorithm": {
+            "window": {
+              "count": 100
+            }
+          }
+        },
+        "values": {
+          "for": {
+            "in": "waarde"
+          }
+        }
+      }
+    }
+  ],
+  "privileges": []
+}

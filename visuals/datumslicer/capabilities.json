@@ -1,0 +1,195 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Datumveld",
+      "name": "veld",
+      "kind": "Grouping"
+    }
+  ],
+  "objects": {
+    "algemeen": {
+      "displayName": "Algemeen",
+      "properties": {
+        "modus": {
+          "displayName": "Modus",
+          "type": {
+            "enumeration": [
+              {
+                "value": "dag",
+                "displayName": "Eén dag"
+              },
+              {
+                "value": "bereik",
+                "displayName": "Bereik (van - tot)"
+              }
+            ]
+          }
+        },
+        "snelkeuze": {
+          "displayName": "Snelkeuzes tonen",
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "label": {
+      "displayName": "Label",
+      "properties": {
+        "toon": {
+          "displayName": "Tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "tekst": {
+          "displayName": "Tekst (leeg = veldnaam)",
+          "type": {
+            "text": true
+          }
+        },
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Kleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "vet": {
+          "displayName": "Vet",
+          "type": {
+            "bool": true
+          }
+        },
+        "ruimteOnder": {
+          "displayName": "Ruimte eronder (px)",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "invoer": {
+      "displayName": "Invoer en knoppen",
+      "properties": {
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Tekstkleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "achtergrond": {
+          "displayName": "Achtergrond",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "rand": {
+          "displayName": "Randkleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "radius": {
+          "displayName": "Hoekradius (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "hoogte": {
+          "displayName": "Hoogte (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "ruimte": {
+          "displayName": "Ruimte ertussen (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "accent": {
+          "displayName": "Accentkleur (actief)",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "lettertype": {
+      "displayName": "Lettertype",
+      "properties": {
+        "familie": {
+          "displayName": "Lettertype",
+          "type": {
+            "text": true
+          }
+        }
+      }
+    },
+    "general": {
+      "properties": {
+        "filter": {
+          "type": {
+            "filter": true
+          }
+        }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "conditions": [
+        {
+          "veld": {
+            "max": 1
+          }
+        }
+      ],
+      "categorical": {
+        "categories": {
+          "for": {
+            "in": "veld"
+          },
+          "dataReductionAlgorithm": {
+            "window": {
+              "count": 5000
+            }
+          }
+        }
+      }
+    }
+  ],
+  "privileges": []
+}

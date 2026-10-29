@@ -4,13 +4,25 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    align-content: center;
+    grid-template-columns: 100%;
+    grid-template-areas: "l" "w" "t";
     border: 1px solid #E5E5E5;
     font-family: Montserrat, "Segoe UI", Arial, sans-serif;
 
     .accent { position: absolute; left: 0; right: 0; top: 0; }
-    .regel { margin: 0; padding: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .waarde { font-weight: 800; font-variant-numeric: tabular-nums; }
+    .regel { margin: 0; padding: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    .label { grid-area: l; }
+    .waarde { grid-area: w; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .toel { grid-area: t; }
+
+    &.compact {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas: "l w" "t w";
+        column-gap: 12px;
+        .waarde { align-self: center; margin-bottom: 0 !important; text-align: right; }
+        .label, .toel { align-self: end; }
+        .toel { align-self: start; }
+    }
 }

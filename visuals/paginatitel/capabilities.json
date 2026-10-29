@@ -1,0 +1,169 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Titel (tekst)",
+      "name": "titel",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Ondertitel (tekst)",
+      "name": "ondertitel",
+      "kind": "Measure"
+    }
+  ],
+  "objects": {
+    "titel": {
+      "displayName": "Titel",
+      "properties": {
+        "tekst": {
+          "displayName": "Tekst (als er geen measure is)",
+          "type": {
+            "text": true
+          }
+        },
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Kleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "regelhoogte": {
+          "displayName": "Regelhoogte (x)",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "ondertitel": {
+      "displayName": "Ondertitel",
+      "properties": {
+        "toon": {
+          "displayName": "Tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "tekst": {
+          "displayName": "Tekst (als er geen measure is)",
+          "type": {
+            "text": true
+          }
+        },
+        "grootte": {
+          "displayName": "Tekstgrootte (pt)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "kleur": {
+          "displayName": "Kleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "regelhoogte": {
+          "displayName": "Regelhoogte (x)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "ruimteBoven": {
+          "displayName": "Ruimte erboven (px)",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "lijn": {
+      "displayName": "Lijn",
+      "properties": {
+        "toon": {
+          "displayName": "Tonen",
+          "type": {
+            "bool": true
+          }
+        },
+        "kleur": {
+          "displayName": "Kleur",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "dikte": {
+          "displayName": "Dikte (px)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "ruimteBoven": {
+          "displayName": "Ruimte erboven (px)",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "lettertype": {
+      "displayName": "Lettertype",
+      "properties": {
+        "familie": {
+          "displayName": "Lettertype",
+          "type": {
+            "text": true
+          }
+        }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "conditions": [
+        {
+          "titel": {
+            "max": 1
+          },
+          "ondertitel": {
+            "max": 1
+          }
+        }
+      ],
+      "categorical": {
+        "values": {
+          "select": [
+            {
+              "bind": {
+                "to": "titel"
+              }
+            },
+            {
+              "bind": {
+                "to": "ondertitel"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "privileges": []
+}

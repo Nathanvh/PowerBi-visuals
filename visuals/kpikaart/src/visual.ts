@@ -80,6 +80,8 @@ export class Visual implements IVisual {
             r.textAlign = String(s.kaart.uitlijning.value.value);
             r.fontFamily = `${s.lettertype.familie.value || "Montserrat"}, "Segoe UI", Arial, sans-serif`;
 
+            const compact = String(s.kaart.indeling.value.value) === "compact";
+            this.root.classList.toggle("compact", compact);
             const wrap = s.kaart.afbreken.value;
             for (const el of [this.pLabel, this.pToel]) {
                 el.style.whiteSpace = wrap ? "normal" : "nowrap";
