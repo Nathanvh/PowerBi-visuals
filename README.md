@@ -21,16 +21,15 @@ Nieuwe versie van een bestaande visual: importeer het bestand opnieuw en bevesti
 
 ### Ophalen op een server (PowerShell)
 
-`scripts/deploy.ps1` haalt de nieuwste Release(s) op en zet het `.pbiviz`-bestand in een map (standaard `.\pbiviz`).
+De server heeft een kloon van deze repo (`git clone https://github.com/Nathanvh/PowerBi-visuals`). Na elke push zet de build de
+gebouwde bestanden in `builds/<naam>.pbiviz`. Bijwerken op de server, in de projectmap:
 
 ```powershell
-$env:GITHUB_TOKEN = '<token met leesrechten op Contents>'   # nodig omdat de repo private is
-.\deploy.ps1                                  # alle visuals, nieuwste versie
-.\deploy.ps1 -Visual kpikaart -Doel D:\PowerBI\visuals
-.\deploy.ps1 -Visual kpikaart -Versie 1.0.1  # een specifieke versie
+.\deploy.ps1                         # git pull en toont de versies in builds\
+.\deploy.ps1 -Doel D:\PowerBI\visuals  # kopieert de .pbiviz-bestanden ook naar die map
 ```
 
-Per visual ontstaat `<naam>-<versie>.pbiviz` en een kopie `<naam>.pbiviz` met een vaste naam.
+Vereist alleen `git`, geen Node.js. Importeer het bestand in Power BI Desktop zoals hierboven beschreven.
 
 ## Werkwijze voor wijzigingen
 

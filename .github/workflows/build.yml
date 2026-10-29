@@ -1,6 +1,7 @@
 name: build
 
-# Push naar main -> alle visuals bouwen, .pbiviz als download bij Actions (Artifacts).
+# Push naar main -> alle visuals bouwen, .pbiviz als download bij Actions (Artifacts)
+# en als bestand in builds/ in de repository gezet (voor deploy.ps1 op de server).
 # Staat het versienummer in visuals/<naam>/pbiviz.json nog niet als Release, dan wordt
 # automatisch tag <naam>-v<versie> + Release met het .pbiviz-bestand gemaakt.
 on:
@@ -68,3 +69,19 @@ jobs:
               gh release create "$tag" bestanden/"$v"/*.pbiviz --target "$GITHUB_SHA" --title "$tag" --generate-notes
             fi
           done
+      - name: Builds in de repository zetten (voor deploy.ps1)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p builds
+          for dir in visuals/*/; do
+            v=$(basename "$dir")
+            cp bestanden/"$v"/*.pbiviz builds/"$v".pbiviz
+          done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add builds
+          if ! git diff --cached --quiet; then
+            git commit -m "Build bijgewerkt [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
