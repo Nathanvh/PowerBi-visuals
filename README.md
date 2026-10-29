@@ -19,17 +19,19 @@ zonder dat ze opnieuw uitgelegd hoeven te worden.
 
 Nieuwe versie van een bestaande visual: importeer het bestand opnieuw en bevestig dat de oude wordt vervangen.
 
-### Ophalen op een server (PowerShell)
+### Ophalen op een server (PowerShell, zonder git)
 
-De server heeft een kloon van deze repo (`git clone https://github.com/Nathanvh/PowerBi-visuals`). Na elke push zet de build de
-gebouwde bestanden in `builds/<naam>.pbiviz`. Bijwerken op de server, in de projectmap:
+Na elke push zet de build de gebouwde bestanden in `builds/<naam>.pbiviz`. `deploy.ps1` haalt die op via de GitHub-API.
+Kopieer het script naar de server (of download het uit de repo) en draai het:
 
 ```powershell
-.\deploy.ps1                         # git pull en toont de versies in builds\
-.\deploy.ps1 -Doel D:\PowerBI\visuals  # kopieert de .pbiviz-bestanden ook naar die map
+.\deploy.ps1                                   # alle visuals naar .\pbiviz
+.\deploy.ps1 -Visual kpikaart -Doel D:\PowerBI\visuals
 ```
 
-Vereist alleen `git`, geen Node.js. Importeer het bestand in Power BI Desktop zoals hierboven beschreven.
+Nodig: een fine-grained GitHub-token met *Contents: Read-only* op deze repo (private). Het script vraagt erom, of leest
+de omgevingsvariabele `GITHUB_TOKEN`. Geen git of Node.js nodig. Bij een uitvoeringsbeleid-melding:
+`powershell -ExecutionPolicy Bypass -File .\deploy.ps1`.
 
 ## Werkwijze voor wijzigingen
 
