@@ -1,6 +1,15 @@
 {
   "name": "Huisstijl 3CX rapportage",
-  "dataColors": ["#111987", "#dd7d32", "#66cccc", "#3650ff", "#31959b", "#c1561e", "#9fb4ff", "#525252"],
+  "dataColors": [
+    "#111987",
+    "#dd7d32",
+    "#66cccc",
+    "#3650ff",
+    "#31959b",
+    "#c1561e",
+    "#9fb4ff",
+    "#525252"
+  ],
   "background": "#FFFFFF",
   "foreground": "#262626",
   "tableAccent": "#111987",
@@ -12,10 +21,26 @@
   "minimum": "#e9f1ff",
   "null": "#D4D4D4",
   "textClasses": {
-    "callout": { "fontSize": 24, "fontFace": "Montserrat", "color": "#111987" },
-    "title": { "fontSize": 12, "fontFace": "Montserrat", "color": "#111987" },
-    "header": { "fontSize": 10, "fontFace": "Montserrat", "color": "#111987" },
-    "label": { "fontSize": 9, "fontFace": "Montserrat", "color": "#525252" }
+    "callout": {
+      "fontSize": 24,
+      "fontFace": "Montserrat",
+      "color": "#111987"
+    },
+    "title": {
+      "fontSize": 12,
+      "fontFace": "Montserrat",
+      "color": "#111987"
+    },
+    "header": {
+      "fontSize": 10,
+      "fontFace": "Montserrat",
+      "color": "#111987"
+    },
+    "label": {
+      "fontSize": 9,
+      "fontFace": "Montserrat",
+      "color": "#525252"
+    }
   },
   "visualStyles": {
     "*": {
@@ -23,7 +48,11 @@
         "title": [
           {
             "show": true,
-            "fontColor": { "solid": { "color": "#111987" } },
+            "fontColor": {
+              "solid": {
+                "color": "#111987"
+              }
+            },
             "fontFamily": "Montserrat",
             "fontSize": 12,
             "bold": true
@@ -32,14 +61,22 @@
         "background": [
           {
             "show": true,
-            "color": { "solid": { "color": "#FFFFFF" } },
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
             "transparency": 0
           }
         ],
         "border": [
           {
             "show": true,
-            "color": { "solid": { "color": "#E5E5E5" } },
+            "color": {
+              "solid": {
+                "color": "#E5E5E5"
+              }
+            },
             "radius": 8
           }
         ]
@@ -49,7 +86,11 @@
       "*": {
         "background": [
           {
-            "color": { "solid": { "color": "#FAFAFA" } },
+            "color": {
+              "solid": {
+                "color": "#FAFAFA"
+              }
+            },
             "transparency": 0
           }
         ]
@@ -59,10 +100,57 @@
       "*": {
         "columnHeaders": [
           {
-            "fontColor": { "solid": { "color": "#111987" } },
-            "backColor": { "solid": { "color": "#FFFFFF" } },
+            "fontColor": {
+              "solid": {
+                "color": "#111987"
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
             "fontFamily": "Montserrat",
-            "bold": true
+            "bold": true,
+            "fontSize": 10.5
+          }
+        ],
+        "values": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#262626"
+              }
+            },
+            "fontFamily": "Montserrat",
+            "fontSize": 9.75,
+            "backColorPrimary": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            }
+          }
+        ],
+        "grid": [
+          {
+            "gridVertical": false,
+            "gridHorizontal": true,
+            "gridHorizontalColor": {
+              "solid": {
+                "color": "#E5E5E5"
+              }
+            },
+            "rowPadding": 8,
+            "outlineColor": {
+              "solid": {
+                "color": "#111987"
+              }
+            }
           }
         ]
       }
@@ -71,10 +159,554 @@
       "*": {
         "columnHeaders": [
           {
-            "fontColor": { "solid": { "color": "#111987" } },
-            "backColor": { "solid": { "color": "#FFFFFF" } },
+            "fontColor": {
+              "solid": {
+                "color": "#111987"
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
             "fontFamily": "Montserrat",
-            "bold": true
+            "bold": true,
+            "fontSize": 10.5
+          }
+        ],
+        "values": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#262626"
+              }
+            },
+            "fontFamily": "Montserrat",
+            "fontSize": 9.75
+          }
+        ],
+        "rowHeaders": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#262626"
+              }
+            },
+            "fontFamily": "Montserrat",
+            "fontSize": 9.75
+          }
+        ]
+      }
+    },
+    "columnChart": {
+      "*": {
+        "categoryAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false
+          }
+        ],
+        "valueAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false,
+            "gridlineShow": true,
+            "gridlineColor": {
+              "solid": {
+                "color": "#E5E5E5"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "color": {
+              "solid": {
+                "color": "#262626"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "show": true,
+            "position": "Top",
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "clusteredColumnChart": {
+      "*": {
+        "categoryAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false
+          }
+        ],
+        "valueAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false,
+            "gridlineShow": true,
+            "gridlineColor": {
+              "solid": {
+                "color": "#E5E5E5"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "color": {
+              "solid": {
+                "color": "#262626"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "show": true,
+            "position": "Top",
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "lineStackedColumnComboChart": {
+      "*": {
+        "categoryAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false
+          }
+        ],
+        "valueAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false,
+            "gridlineShow": true,
+            "gridlineColor": {
+              "solid": {
+                "color": "#E5E5E5"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "color": {
+              "solid": {
+                "color": "#262626"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "show": true,
+            "position": "Top",
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "lineClusteredColumnComboChart": {
+      "*": {
+        "categoryAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false
+          }
+        ],
+        "valueAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false,
+            "gridlineShow": true,
+            "gridlineColor": {
+              "solid": {
+                "color": "#E5E5E5"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "color": {
+              "solid": {
+                "color": "#262626"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "show": true,
+            "position": "Top",
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "lineChart": {
+      "*": {
+        "categoryAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false
+          }
+        ],
+        "valueAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false,
+            "gridlineShow": true,
+            "gridlineColor": {
+              "solid": {
+                "color": "#E5E5E5"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "color": {
+              "solid": {
+                "color": "#262626"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "show": true,
+            "position": "Top",
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "barChart": {
+      "*": {
+        "categoryAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false
+          }
+        ],
+        "valueAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false,
+            "gridlineShow": true,
+            "gridlineColor": {
+              "solid": {
+                "color": "#E5E5E5"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "color": {
+              "solid": {
+                "color": "#262626"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "show": true,
+            "position": "Top",
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "clusteredBarChart": {
+      "*": {
+        "categoryAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false
+          }
+        ],
+        "valueAxis": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "showAxisTitle": false,
+            "gridlineShow": true,
+            "gridlineColor": {
+              "solid": {
+                "color": "#E5E5E5"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "color": {
+              "solid": {
+                "color": "#262626"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "show": true,
+            "position": "Top",
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "slicer": {
+      "*": {
+        "data": [
+          {
+            "mode": "Dropdown"
+          }
+        ],
+        "header": [
+          {
+            "show": true,
+            "fontColor": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "fontFamily": "Montserrat",
+            "textSize": 9,
+            "bold": false
+          }
+        ],
+        "items": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#262626"
+              }
+            },
+            "background": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "fontFamily": "Montserrat",
+            "textSize": 10.5,
+            "outline": "Frame",
+            "outlineColor": {
+              "solid": {
+                "color": "#E5E5E5"
+              }
+            }
+          }
+        ],
+        "date": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#262626"
+              }
+            },
+            "fontFamily": "Montserrat",
+            "textSize": 10.5,
+            "background": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            }
+          }
+        ],
+        "title": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ],
+        "background": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#111987"
+              }
+            },
+            "fontSize": 24,
+            "fontFamily": "Montserrat"
+          }
+        ],
+        "categoryLabels": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#525252"
+              }
+            },
+            "fontSize": 9,
+            "fontFamily": "Montserrat"
+          }
+        ],
+        "wordWrap": [
+          {
+            "show": true
           }
         ]
       }
