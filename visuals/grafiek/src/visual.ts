@@ -7,7 +7,7 @@ import IVisual = powerbi.extensibility.visual.IVisual;
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import { VisualFormattingSettingsModel } from "./settings";
-import { fontStack, formatteer, formatCode, mmss, escapeHtml } from "../../../shared/huisstijl";
+import { tekstOp, fontStack, formatteer, formatCode, mmss, escapeHtml } from "../../../shared/huisstijl";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -65,7 +65,7 @@ export class Visual implements IVisual {
         const tekstKleur = s.assen.kleur.value.value;
         const kleuren = [s.reeks.k1, s.reeks.k2, s.reeks.k3, s.reeks.k4, s.reeks.k5, s.reeks.k6].map(k => k.value.value);
         const n = cat.values.length;
-        const labelVan = (v: any): string => v instanceof Date ? formatCode(v, s.assen.catNotatie.value || "dd-MM") : formatteer(v, cat.source.format);
+        const labelVan = (v: any): string => v instanceof Date && (s.assen.catNotatie.value || "").trim() ? formatCode(v, s.assen.catNotatie.value) : formatteer(v, cat.source.format);
         const labels = cat.values.map(labelVan);
 
         // Legenda
@@ -140,9 +140,12 @@ export class Visual implements IVisual {
                     const v = kolomWaarde(ki, i); if (v <= 0) { return; }
                     const y1 = yL(acc + v), y0 = yL(acc);
                     delen.push(`<rect x="${cx(i) - bw / 2}" y="${y1}" width="${bw}" height="${Math.max(y0 - y1, 0)}" fill="${kleuren[ki % 6]}"><title>${escapeHtml(labels[i])} - ${escapeHtml(k.source.displayName)}: ${escapeHtml(fmtKolom(v))}</title></rect>`);
+                    if (s.kolommen.labels.value && s.kolommen.binnen.value && y0 - y1 >= fpx * 1.3) {
+                        delen.push(`<text x="${cx(i)}" y="${(y0 + y1) / 2 + fpx * 0.35}" text-anchor="middle" font-size="${fpx}" fill="${tekstOp(kleuren[ki % 6])}">${escapeHtml(fmtKolom(v))}</text>`);
+                    }
                     acc += v;
                 });
-                if (s.kolommen.labels.value && acc > 0) {
+                if (s.kolommen.labels.value && s.kolommen.totaal.value && acc > 0) {
                     delen.push(`<text x="${cx(i)}" y="${yL(acc) - 4}" text-anchor="middle" font-size="${fpx}" fill="${tekstKleur}">${escapeHtml(fmtKolom(acc))}</text>`);
                 }
             } else {
@@ -153,7 +156,9 @@ export class Visual implements IVisual {
                     const y = yL(v);
                     delen.push(`<rect x="${x}" y="${y}" width="${Math.max(bw - 1, 1)}" height="${Math.max(yL(0) - y, 0)}" rx="${r}" fill="${kleuren[ki % 6]}"><title>${escapeHtml(labels[i])} - ${escapeHtml(k.source.displayName)}: ${escapeHtml(fmtKolom(v))}</title></rect>`);
                     if (s.kolommen.labels.value && v > 0) {
-                        delen.push(`<text x="${x + bw / 2}" y="${y - 4}" text-anchor="middle" font-size="${fpx}" fill="${tekstKleur}">${escapeHtml(fmtKolom(v))}</text>`);
+                        const hoogte = yL(0) - y;
+                        const binnen = s.kolommen.binnen.value && hoogte >= fpx * 1.3 && bw >= tekstBreedte(fmtKolom(v)) + 2;
+                        delen.push(`<text x="${x + bw / 2}" y="${binnen ? y + fpx * 1.15 : y - 4}" text-anchor="middle" font-size="${fpx}" fill="${binnen ? tekstOp(kleuren[ki % 6]) : tekstKleur}">${escapeHtml(fmtKolom(v))}</text>`);
                     }
                 });
             }

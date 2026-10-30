@@ -75,6 +75,18 @@
           "type": {
             "text": true
           }
+        },
+        "binnen": {
+          "displayName": "Waarden in de kolom (uit = erboven)",
+          "type": {
+            "bool": true
+          }
+        },
+        "totaal": {
+          "displayName": "Totaal boven gestapelde kolom",
+          "type": {
+            "bool": true
+          }
         }
       }
     },
@@ -230,7 +242,7 @@
           }
         },
         "catNotatie": {
-          "displayName": "Notatie categorieën bij datums (bijv. dd-MM, dd-MM-yyyy)",
+          "displayName": "Notatie categorieën (leeg = formaat van het veld; bijv. dd-MM, d mmmm)",
           "type": {
             "text": true
           }

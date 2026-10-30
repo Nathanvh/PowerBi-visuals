@@ -135,3 +135,12 @@ Standaard kaartmaat: 165 × 108 (zeven naast elkaar), kleine kaart 299 × 64.
 De rapporten draaien op de SQL Server-views `rapport.vw_cdr_gesprek`, `rapport.vw_cdr_gemist` en `rapport.vw_cdr_medewerker_dag`
 (bron: 3CX `public_cdroutput`). Datumtabel: `_dim datum`. Hoofdmeasure: `[QueueGesprekken]`.
 Eigen measures horen bij de visuals die ze voeden; een visual zelf bevat geen datalogica.
+
+## Gedrag dat vaak misgaat (afspraken)
+
+- **Slicers die elkaar beperken:** de tegel- en datumslicer hebben een optionele rol *Beperken tot data (measure)*. Sleep daar een measure in (bijv. `[QueueGesprekken]`);
+  dan tonen ze alleen waarden waarvoor, na de andere slicers, data bestaat. Zonder measure tonen ze alle waarden van het veld.
+- **Datumslicer** toont de gekozen datum altijd als tekst (instelbaar via *Datumnotatie*), los van de taal van de browser.
+- **Datumnotatie van een veld** (Power BI-formaat zoals `d mmmm`, `dd-mm-yyyy`) wordt overgenomen door alle visuals via `formatteer`/`datumFormat` in `shared/huisstijl.ts`. Een eigen notatie overschrijft dit.
+- **Tabel, databalken:** meerdere kolommen met eigen kleur via `Kolom=#kleur; Kolom2=#kleur2`.
+- **Grafiek:** *Waarden tonen* zet waarden in de kolomsegmenten (uit te zetten via *Waarden in de kolom*), plus een totaal boven gestapelde kolommen.

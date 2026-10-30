@@ -4,7 +4,7 @@
     "displayName": "Tabel 3CX",
     "guid": "tabel3cx6b8d0f2a4c6e4a8c0e2a4c6e8a0c2e4b6",
     "visualClassName": "Visual",
-    "version": "1.0.2.0",
+    "version": "1.1.0.0",
     "description": "Tabel in de huisstijl met totaalrij, databalk, m:ss-kolommen en statuskleuren",
     "supportUrl": "https://www.bevico.nl",
     "gitHubUrl": ""
@@ -22,5 +22,5 @@
   "capabilities": "capabilities.json",
   "dependencies": null,
   "stringResources": [],
-  "version": "1.0.2.0"
+  "version": "1.1.0.0"
 }

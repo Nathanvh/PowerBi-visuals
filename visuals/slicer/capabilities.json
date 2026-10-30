@@ -4,6 +4,11 @@
       "displayName": "Veld",
       "name": "veld",
       "kind": "Grouping"
+    },
+    {
+      "displayName": "Beperken tot data (measure, optioneel)",
+      "name": "meting",
+      "kind": "Measure"
     }
   ],
   "objects": {
@@ -187,6 +192,9 @@
         {
           "veld": {
             "max": 1
+          },
+          "meting": {
+            "max": 1
           }
         }
       ],
@@ -200,6 +208,15 @@
               "count": 500
             }
           }
+        },
+        "values": {
+          "select": [
+            {
+              "bind": {
+                "to": "meting"
+              }
+            }
+          ]
         }
       }
     }

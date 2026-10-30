@@ -7,7 +7,7 @@ import IVisual = powerbi.extensibility.visual.IVisual;
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import { VisualFormattingSettingsModel } from "./settings";
-import { fontStack } from "../../../shared/huisstijl";
+import { fontStack, datumFormat } from "../../../shared/huisstijl";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const lokaal = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
@@ -39,6 +39,7 @@ export class Visual implements IVisual {
     private min = ""; private max = "";
     private start = ""; private eind = "";
     private veldnaam = "";
+    private toegepastOp = 0;
 
     constructor(options: VisualConstructorOptions) {
         this.events = options.host.eventService;
@@ -57,7 +58,7 @@ export class Visual implements IVisual {
             const dv = options.dataViews && options.dataViews[0];
             this.fs = this.service.populateFormattingSettingsModel(VisualFormattingSettingsModel, dv);
             const cat = dv && dv.categorical && dv.categorical.categories && dv.categorical.categories[0];
-            this.target = null; this.min = ""; this.max = ""; this.start = ""; this.eind = "";
+            this.target = null; this.min = ""; this.max = "";
             if (cat) {
                 const q: string = cat.source.queryName || "";
                 const naam: string = cat.source.displayName;
@@ -67,13 +68,20 @@ export class Visual implements IVisual {
                 const dagen = cat.values.filter((v: any) => v !== null && v !== undefined).map(naarYmd).sort();
                 if (dagen.length) { this.min = dagen[0]; this.max = dagen[dagen.length - 1]; }
             }
-            const f: any = dv && dv.metadata && dv.metadata.objects && (dv.metadata.objects as any).general && (dv.metadata.objects as any).general.filter;
+            // Filter terugzetten: eerst jsonFilters, dan metadata. Net toegepast en nog niets terug? Dan lokale keuze houden.
+            const jf: any = (options as any).jsonFilters;
+            const meta: any = dv && dv.metadata && dv.metadata.objects && (dv.metadata.objects as any).general && (dv.metadata.objects as any).general.filter;
+            const f: any = (Array.isArray(jf) && jf.length ? jf[0] : null) || meta;
             if (f && Array.isArray(f.conditions)) {
+                let st = "", ei = "";
                 f.conditions.forEach((c: any) => {
-                    if (c.operator === "GreaterThanOrEqual" || c.operator === "GreaterThan") { this.start = naarYmd(c.value); }
-                    if (c.operator === "LessThan") { this.eind = plusDagen(naarYmd(c.value), -1); }
-                    if (c.operator === "LessThanOrEqual") { this.eind = naarYmd(c.value); }
+                    if (c.operator === "GreaterThanOrEqual" || c.operator === "GreaterThan") { st = naarYmd(c.value); }
+                    if (c.operator === "LessThan") { ei = plusDagen(naarYmd(c.value), -1); }
+                    if (c.operator === "LessThanOrEqual") { ei = naarYmd(c.value); }
                 });
+                this.start = st; this.eind = ei;
+            } else if (Date.now() - this.toegepastOp > 3000) {
+                this.start = ""; this.eind = "";
             }
             this.teken();
             this.events.renderingFinished(options);
@@ -113,13 +121,22 @@ export class Visual implements IVisual {
             this.rij.appendChild(b);
         };
         const veld = (waarde: string, label: string, wijzig: (v: string) => void) => {
+            // Native datuminvoer toont de taal van de browser (mm/dd/yyyy). Daarom een eigen tekst eroverheen.
+            const w = document.createElement("label");
+            w.className = "veld";
+            stijl(w);
+            const t = document.createElement("span");
+            t.className = "tekst" + (waarde ? "" : " leeg");
+            const [jj, mm, dd] = waarde ? waarde.split("-").map(Number) : [0, 0, 0];
+            t.textContent = waarde ? datumFormat(new Date(jj, mm - 1, dd), s.invoer.datumnotatie.value || "dd-MM-yyyy") : label;
             const i = document.createElement("input");
-            i.type = "date"; i.className = "veld"; i.value = waarde; i.setAttribute("aria-label", label);
+            i.type = "date"; i.value = waarde; i.setAttribute("aria-label", label); i.lang = "nl-NL";
             if (this.min) { i.min = this.min; }
             if (this.max) { i.max = this.max; }
-            stijl(i);
+            i.addEventListener("click", () => { try { (i as any).showPicker(); } catch (e) { /* valt terug op standaardgedrag */ } });
             i.addEventListener("change", () => { if (i.value) { wijzig(i.value); } });
-            this.rij.appendChild(i);
+            w.append(t, i);
+            this.rij.appendChild(w);
         };
 
         const vandaag = lokaal(new Date());
@@ -161,7 +178,7 @@ export class Visual implements IVisual {
 
     private zet(start: string, eind: string) {
         if (!this.target) { return; }
-        this.start = start; this.eind = eind;
+        this.start = start; this.eind = eind; this.toegepastOp = Date.now();
         if (!start && !eind) {
             this.host.applyJsonFilter(null as any, "general", "filter", 1 as any);
         } else {

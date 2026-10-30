@@ -4,7 +4,7 @@
     "displayName": "Datumslicer 3CX",
     "guid": "datumslicer3cx9e1a2c4b6d8f4a0c2e4a6c8e0a2b4d6f",
     "visualClassName": "Visual",
-    "version": "1.0.2.0",
+    "version": "1.1.0.0",
     "description": "Datumslicer in de huisstijl: een dag (met vorige/volgende) of een bereik, met snelkeuzes",
     "supportUrl": "https://www.bevico.nl",
     "gitHubUrl": ""
@@ -22,5 +22,5 @@
   "capabilities": "capabilities.json",
   "dependencies": null,
   "stringResources": [],
-  "version": "1.0.2.0"
+  "version": "1.1.0.0"
 }

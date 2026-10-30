@@ -45,8 +45,8 @@ class TotaalCard extends Card {
 
 class OpmaakCard extends Card {
     mmss = h.tekst("mmss", "Kolommen als m:ss: namen van de kolomkoppen, met komma (waarde in seconden)", "");
-    databalk = h.tekst("databalk", "Kolom met databalk: naam van de kolomkop", "");
-    databalkKleur = h.kleur("databalkKleur", "Kleur databalk", "#9fb4ff");
+    databalk = h.tekst("databalk", "Databalken: kolomkoppen, optioneel met kleur (Kolom=#dd7d32; Kolom2=#66cccc)", "");
+    databalkKleur = h.kleur("databalkKleur", "Standaardkleur databalk", "#9fb4ff");
     statusKleuren = h.tekst("statusKleuren", "Statuskleuren (Tekst=#kleur; gescheiden door ;)", "Gemist=#dd7d32;Beantwoord=#111987;Terugbelverzoek=#31959b");
     notaties = h.tekst("notaties", "Notatie per kolom: Kolomnaam=code; Kolomnaam2=code (bijv. Gesprekken=#,0; Opname %=0.0%)", "");
     name = "opmaak";

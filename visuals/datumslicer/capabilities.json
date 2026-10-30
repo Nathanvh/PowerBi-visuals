@@ -4,6 +4,11 @@
       "displayName": "Datumveld",
       "name": "veld",
       "kind": "Grouping"
+    },
+    {
+      "displayName": "Beperken tot data (measure, optioneel)",
+      "name": "meting",
+      "kind": "Measure"
     }
   ],
   "objects": {
@@ -148,6 +153,12 @@
               }
             }
           }
+        },
+        "datumnotatie": {
+          "displayName": "Datumnotatie (bijv. dd-MM-yyyy of d mmmm)",
+          "type": {
+            "text": true
+          }
         }
       }
     },
@@ -178,6 +189,9 @@
         {
           "veld": {
             "max": 1
+          },
+          "meting": {
+            "max": 1
           }
         }
       ],
@@ -191,6 +205,15 @@
               "count": 5000
             }
           }
+        },
+        "values": {
+          "select": [
+            {
+              "bind": {
+                "to": "meting"
+              }
+            }
+          ]
         }
       }
     }

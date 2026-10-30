@@ -148,13 +148,13 @@
           }
         },
         "databalk": {
-          "displayName": "Kolom met databalk: naam van de kolomkop",
+          "displayName": "Databalken: kolomkoppen, optioneel met kleur (Kolom=#dd7d32; Kolom2=#66cccc)",
           "type": {
             "text": true
           }
         },
         "databalkKleur": {
-          "displayName": "Kleur databalk",
+          "displayName": "Standaardkleur databalk",
           "type": {
             "fill": {
               "solid": {

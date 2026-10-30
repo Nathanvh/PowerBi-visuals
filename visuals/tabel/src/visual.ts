@@ -53,7 +53,11 @@ export class Visual implements IVisual {
         const namenVan = (c: any): string[] => [String(c.displayName).toLowerCase(), String(c.queryName || "").split(".").pop()!.toLowerCase()];
         const inLijst = (c: any, set: Set<string>) => namenVan(c).some(n => set.has(n));
         const zonderTotaal = new Set(lijstVan(s.totaal.uitsluiten.value));
-        const databalkNaam = (s.opmaak.databalk.value || "").trim().toLowerCase();
+        // "Kolom=#kleur; Kolom2=#kleur2" of "Kolom, Kolom2" (zonder kleur geldt de standaardkleur)
+        const balkDef: { naam: string, kleur: string }[] = (s.opmaak.databalk.value || "").split(/[;,\n]/).map((x: string) => {
+            const [n, k] = x.split("=");
+            return { naam: (n || "").trim().toLowerCase(), kleur: k && isHex(k.trim()) ? k.trim() : s.opmaak.databalkKleur.value.value };
+        }).filter((d: any) => d.naam);
         const status: { [k: string]: string } = {};
         (s.opmaak.statusKleuren.value || "").split(";").forEach((p: string) => {
             const [k, v] = p.split("=");
@@ -106,11 +110,11 @@ export class Visual implements IVisual {
             thead.appendChild(th);
         });
 
-        const maxBalk = (() => {
-            const bi = kol.findIndex(c => namenVan(c).indexOf(databalkNaam) >= 0);
-            if (bi < 0) { return { bi, max: 0 }; }
-            return { bi, max: rijen.reduce((a, r) => typeof r[bi] === "number" ? Math.max(a, r[bi]) : a, 0) };
-        })();
+        const balken: { [i: number]: { max: number, kleur: string } } = {};
+        balkDef.forEach(d => {
+            const bi = kol.findIndex(c => namenVan(c).indexOf(d.naam) >= 0);
+            if (bi >= 0) { balken[bi] = { kleur: d.kleur, max: rijen.reduce((m, r) => typeof r[bi] === "number" ? Math.max(m, r[bi]) : m, 0) }; }
+        });
 
         const tbody = tbl.createTBody();
         rijen.forEach((r, ri) => {
@@ -126,9 +130,10 @@ export class Visual implements IVisual {
                 td.style.padding = celPad;
                 td.style.borderBottom = `1px solid ${s.tekst.scheiding.value.value}`;
                 const kleur = status[String(v).toLowerCase()];
-                if (i === maxBalk.bi && maxBalk.max > 0 && typeof v === "number") {
+                const balk = balken[i];
+                if (balk && balk.max > 0 && typeof v === "number") {
                     td.classList.add("bar");
-                    td.innerHTML = `<div class="vulling" style="width:${Math.max(0, v / maxBalk.max) * 100}%;background:${s.opmaak.databalkKleur.value.value}"></div><span class="tekst">${escapeHtml(tekst)}</span>`;
+                    td.innerHTML = `<div class="vulling" style="width:${Math.max(0, v / balk.max) * 100}%;background:${balk.kleur}"></div><span class="tekst">${escapeHtml(tekst)}</span>`;
                 } else if (kleur) {
                     td.innerHTML = `<span class="stip" style="background:${kleur}"></span>${escapeHtml(tekst)}`;
                 } else {

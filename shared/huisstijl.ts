@@ -12,10 +12,52 @@ export function fontStack(familie: string): string {
     return `${familie || LETTERTYPE}, "Segoe UI", Arial, sans-serif`;
 }
 
+
+const MAANDEN = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
+const DAGEN = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
+
+/**
+ * Datumopmaak die zowel Power BI-formaten (d mmmm, dd-mm-yyyy) als gewone codes (dd-MM-yyyy, HH:mm) begrijpt.
+ * Tokens: yyyy yy mmmm mmm mm m dddd ddd dd d hh h nn ss s. "mm" is minuten als er een dubbele punt naast staat, anders maand.
+ */
+export function datumFormat(d: Date, fmt: string): string {
+    const p = (n: number) => String(n).padStart(2, "0");
+    const f = fmt || "dd-MM-yyyy";
+    return f.replace(/yyyy|yy|mmmm|mmm|mm|m|dddd|ddd|dd|d|hh|h|nn|ss|s/gi, (t, pos: number) => {
+        const l = t.toLowerCase();
+        switch (l) {
+            case "yyyy": return String(d.getFullYear());
+            case "yy": return String(d.getFullYear()).slice(2);
+            case "mmmm": return MAANDEN[d.getMonth()];
+            case "mmm": return MAANDEN[d.getMonth()].slice(0, 3);
+            case "mm": case "m": {
+                const minuut = f[pos - 1] === ":" || f[pos + t.length] === ":";
+                const v = minuut ? d.getMinutes() : d.getMonth() + 1;
+                return l === "mm" ? p(v) : String(v);
+            }
+            case "dddd": return DAGEN[d.getDay()];
+            case "ddd": return DAGEN[d.getDay()].slice(0, 2);
+            case "dd": return p(d.getDate());
+            case "d": return String(d.getDate());
+            case "hh": return p(d.getHours());
+            case "h": return String(d.getHours());
+            case "nn": return p(d.getMinutes());
+            case "ss": return p(d.getSeconds());
+            default: return String(d.getSeconds());
+        }
+    });
+}
+
+/** Zwart of wit, afhankelijk van de achtergrondkleur. */
+export function tekstOp(achtergrond: string, donker = "#262626", licht = "#FFFFFF"): string {
+    const [r, g, b] = hexNaarRgb(achtergrond);
+    return (0.299 * r + 0.587 * g + 0.114 * b) / 255 < 0.6 ? licht : donker;
+}
+
 /** Formatteert een waarde volgens het Power BI-formaat van de measure (nl-NL). */
 export function formatteer(waarde: any, formaat?: string): string {
     if (waarde === null || waarde === undefined) { return ""; }
-    if (waarde instanceof Date) { return waarde.toLocaleDateString("nl-NL"); }
+    if (waarde instanceof Date) { return formaat && !/^general/i.test(formaat) ? datumFormat(waarde, formaat) : waarde.toLocaleDateString("nl-NL"); }
     if (typeof waarde !== "number") { return String(waarde); }
     const f = formaat || "";
     const dec = (f.split(".")[1] || "").replace(/[^0#]/g, "").length;
@@ -103,13 +145,7 @@ export function formatCode(waarde: any, code?: string, terugval?: string): strin
             minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: c.indexOf(",") >= 0
         }) + (pct ? "%" : "");
     }
-    if (waarde instanceof Date) {
-        const p = (n: number) => String(n).padStart(2, "0");
-        return c.replace(/yyyy|yy|MM|dd|HH|mm|ss/g, t => ({
-            yyyy: String(waarde.getFullYear()), yy: String(waarde.getFullYear()).slice(2), MM: p(waarde.getMonth() + 1),
-            dd: p(waarde.getDate()), HH: p(waarde.getHours()), mm: p(waarde.getMinutes()), ss: p(waarde.getSeconds())
-        } as any)[t]);
-    }
+    if (waarde instanceof Date) { return datumFormat(waarde, c); }
     return String(waarde);
 }
 

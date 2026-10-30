@@ -38,9 +38,10 @@ class InvoerCard extends Card {
     hoogte = h.num("hoogte", "Hoogte (px)", 36);
     ruimte = h.num("ruimte", "Ruimte ertussen (px)", 8);
     accent = h.kleur("accent", "Accentkleur (actief)", "#111987");
+    datumnotatie = h.tekst("datumnotatie", "Datumnotatie (bijv. dd-MM-yyyy of d mmmm)", "dd-MM-yyyy");
     name = "invoer";
     displayName = "Invoer en knoppen";
-    slices: Slice[] = [this.grootte, this.kleur, this.achtergrond, this.rand, this.radius, this.hoogte, this.ruimte, this.accent];
+    slices: Slice[] = [this.grootte, this.kleur, this.achtergrond, this.rand, this.radius, this.hoogte, this.ruimte, this.accent, this.datumnotatie];
 }
 
 class LettertypeCard extends Card {

@@ -4,7 +4,7 @@
     "displayName": "Kolom- en lijngrafiek 3CX",
     "guid": "grafiek3cx4a6c8e0b2d4f4b6d8f0a2c4e6a8c0e2b4",
     "visualClassName": "Visual",
-    "version": "1.0.2.0",
+    "version": "1.1.0.0",
     "description": "Kolommen (gestapeld of naast elkaar) met optionele lijn op een tweede as, in de huisstijl",
     "supportUrl": "https://www.bevico.nl",
     "gitHubUrl": ""
@@ -22,5 +22,5 @@
   "capabilities": "capabilities.json",
   "dependencies": null,
   "stringResources": [],
-  "version": "1.0.2.0"
+  "version": "1.1.0.0"
 }
