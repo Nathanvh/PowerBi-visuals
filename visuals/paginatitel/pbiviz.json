@@ -4,7 +4,7 @@
     "displayName": "Paginatitel 3CX",
     "guid": "paginatitel3cx5b2e7a9c1d4f4e6a8b0c2d4e6f8a0b1c",
     "visualClassName": "Visual",
-    "version": "1.0.0.0",
+    "version": "1.0.1.0",
     "description": "Paginatitel met ondertitel en oranje lijn in de huisstijl",
     "supportUrl": "https://www.bevico.nl",
     "gitHubUrl": ""
@@ -22,5 +22,5 @@
   "capabilities": "capabilities.json",
   "dependencies": null,
   "stringResources": [],
-  "version": "1.0.0.0"
+  "version": "1.0.1.0"
 }

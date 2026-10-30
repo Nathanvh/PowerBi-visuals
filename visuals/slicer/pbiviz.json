@@ -4,7 +4,7 @@
     "displayName": "Slicer tegels 3CX",
     "guid": "slicertegels3cx7c3f8b0d2e5a4f7b9c1d3e5f7a9b0c2d",
     "visualClassName": "Visual",
-    "version": "1.0.0.0",
+    "version": "1.0.1.0",
     "description": "Slicer met tegels in de huisstijl (meerdere waarden selecteren, Alles-tegel)",
     "supportUrl": "https://www.bevico.nl",
     "gitHubUrl": ""
@@ -22,5 +22,5 @@
   "capabilities": "capabilities.json",
   "dependencies": null,
   "stringResources": [],
-  "version": "1.0.0.0"
+  "version": "1.0.1.0"
 }

@@ -4,7 +4,7 @@
     "displayName": "Heatmap 3CX",
     "guid": "heatmap3cx2d4f6a8c0e1b4d6f8a0c2e4a6c8e0b2d4f",
     "visualClassName": "Visual",
-    "version": "1.0.0.0",
+    "version": "1.0.1.0",
     "description": "Heatmap (rij x kolom) in de huisstijl, cellen vullen de hele visual",
     "supportUrl": "https://www.bevico.nl",
     "gitHubUrl": ""
@@ -22,5 +22,5 @@
   "capabilities": "capabilities.json",
   "dependencies": null,
   "stringResources": [],
-  "version": "1.0.0.0"
+  "version": "1.0.1.0"
 }
