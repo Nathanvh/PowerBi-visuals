@@ -69,6 +69,12 @@
           "type": {
             "bool": true
           }
+        },
+        "notatie": {
+          "displayName": "Notatie (leeg = formaat van het veld; bijv. 0, 0.0, #,0, 0%, m:ss)",
+          "type": {
+            "text": true
+          }
         }
       }
     },
@@ -107,6 +113,12 @@
           "displayName": "Waarden als m:ss (seconden)",
           "type": {
             "bool": true
+          }
+        },
+        "notatie": {
+          "displayName": "Notatie (leeg = formaat van het veld; bijv. 0, 0.0, 0%, m:ss)",
+          "type": {
+            "text": true
           }
         }
       }
@@ -215,6 +227,12 @@
           "displayName": "Waardeas tonen",
           "type": {
             "bool": true
+          }
+        },
+        "catNotatie": {
+          "displayName": "Notatie categorieën bij datums (bijv. dd-MM, dd-MM-yyyy)",
+          "type": {
+            "text": true
           }
         }
       }

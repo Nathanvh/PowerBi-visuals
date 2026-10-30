@@ -1,88 +1,74 @@
 "use strict";
 
 import { formattingSettings } from "powerbi-visuals-utils-formattingmodel";
+import { instellingenHelpers } from "../../../shared/huisstijl";
+
+const h = instellingenHelpers(formattingSettings);
 
 import Card = formattingSettings.SimpleCard;
 import Slice = formattingSettings.Slice;
 import Model = formattingSettings.Model;
 
-const num = (name: string, displayName: string, value: number) =>
-    new formattingSettings.NumUpDown({ name, displayName, value });
-const col = (name: string, displayName: string, value: string) =>
-    new formattingSettings.ColorPicker({ name, displayName, value: { value } });
-
 class KaartCard extends Card {
-    achtergrond = col("achtergrond", "Achtergrond", "#FFFFFF");
-    randKleur = col("randKleur", "Randkleur", "#E5E5E5");
-    randRadius = num("randRadius", "Hoekradius (px)", 8);
-    paddingBoven = num("paddingBoven", "Padding boven/onder (px)", 12);
-    paddingZij = num("paddingZij", "Padding links/rechts (px)", 12);
-    afbreken = new formattingSettings.ToggleSwitch({ name: "afbreken", displayName: "Tekst afbreken", value: true });
-    indeling = new formattingSettings.ItemDropdown({
-        name: "indeling", displayName: "Indeling",
-        items: [
-            { value: "standaard", displayName: "Standaard (onder elkaar)" },
-            { value: "compact", displayName: "Compact (waarde rechts)" }
-        ],
-        value: { value: "standaard", displayName: "Standaard (onder elkaar)" }
-    });
-    uitlijning = new formattingSettings.ItemDropdown({
-        name: "uitlijning", displayName: "Uitlijning",
-        items: [
-            { value: "left", displayName: "Links" },
-            { value: "center", displayName: "Midden" },
-            { value: "right", displayName: "Rechts" }
-        ],
-        value: { value: "left", displayName: "Links" }
-    });
+    achtergrond = h.kleur("achtergrond", "Achtergrond", "#FFFFFF");
+    randKleur = h.kleur("randKleur", "Randkleur", "#E5E5E5");
+    randRadius = h.num("randRadius", "Hoekradius (px)", 8);
+    paddingBoven = h.num("paddingBoven", "Padding boven/onder (px)", 10);
+    paddingZij = h.num("paddingZij", "Padding links/rechts (px)", 12);
+    indeling = h.keuze("indeling", "Indeling", [{"value": "standaard", "displayName": "Standaard (onder elkaar)"}, {"value": "compact", "displayName": "Compact (waarde rechts)"}], "standaard");
+    uitlijning = h.keuze("uitlijning", "Uitlijning", [{"value": "left", "displayName": "Links"}, {"value": "center", "displayName": "Midden"}, {"value": "right", "displayName": "Rechts"}], "left");
     name = "kaart";
     displayName = "Kaart";
-    slices: Slice[] = [this.achtergrond, this.randKleur, this.randRadius, this.paddingBoven, this.paddingZij, this.afbreken, this.indeling, this.uitlijning];
+    slices: Slice[] = [this.achtergrond, this.randKleur, this.randRadius, this.paddingBoven, this.paddingZij, this.indeling, this.uitlijning];
 }
 
 class AccentCard extends Card {
-    toon = new formattingSettings.ToggleSwitch({ name: "toon", displayName: "Tonen", value: true });
-    standaardKleur = col("standaardKleur", "Standaardkleur", "#D4D4D4");
-    hoogte = num("hoogte", "Hoogte (px)", 4);
+    toon = h.schakel("toon", "Tonen", true);
+    standaardKleur = h.kleur("standaardKleur", "Standaardkleur", "#D4D4D4");
+    hoogte = h.num("hoogte", "Hoogte (px)", 4);
     name = "accent";
     displayName = "Accentbalk";
     slices: Slice[] = [this.toon, this.standaardKleur, this.hoogte];
 }
 
 class LabelCard extends Card {
-    tekst = new formattingSettings.TextInput({ name: "tekst", displayName: "Tekst", value: "", placeholder: "Naam van de kaart" });
-    grootte = num("grootte", "Tekstgrootte (pt)", 9);
-    kleur = col("kleur", "Kleur", "#525252");
-    vet = new formattingSettings.ToggleSwitch({ name: "vet", displayName: "Vet", value: false });
-    regelhoogte = num("regelhoogte", "Regelhoogte (x)", 1.2);
-    ruimteOnder = num("ruimteOnder", "Ruimte eronder (px)", 4);
+    tekst = h.tekst("tekst", "Tekst (leeg = veldnaam)", "");
+    grootte = h.num("grootte", "Tekstgrootte (pt)", 9);
+    kleur = h.kleur("kleur", "Kleur", "#525252");
+    vet = h.schakel("vet", "Vet", false);
+    regelhoogte = h.num("regelhoogte", "Regelhoogte (x)", 1.2);
+    ruimteOnder = h.num("ruimteOnder", "Ruimte eronder (px)", 2);
+    regels = h.num("regels", "Aantal regels (ruimte blijft gereserveerd)", 1);
     name = "label";
     displayName = "Label";
-    slices: Slice[] = [this.tekst, this.grootte, this.kleur, this.vet, this.regelhoogte, this.ruimteOnder];
+    slices: Slice[] = [this.tekst, this.grootte, this.kleur, this.vet, this.regelhoogte, this.ruimteOnder, this.regels];
 }
 
 class WaardeCard extends Card {
-    grootte = num("grootte", "Tekstgrootte (pt)", 24);
-    kleur = col("kleur", "Kleur", "#111987");
-    regelhoogte = num("regelhoogte", "Regelhoogte (x)", 1.1);
-    ruimteOnder = num("ruimteOnder", "Ruimte eronder (px)", 2);
+    notatie = h.tekst("notatie", "Notatie (leeg = formaat van het veld)", "");
+    grootte = h.num("grootte", "Tekstgrootte (pt)", 24);
+    kleur = h.kleur("kleur", "Kleur", "#111987");
+    regelhoogte = h.num("regelhoogte", "Regelhoogte (x)", 1.1);
+    ruimteOnder = h.num("ruimteOnder", "Ruimte eronder (px)", 2);
     name = "waarde";
     displayName = "Waarde";
-    slices: Slice[] = [this.grootte, this.kleur, this.regelhoogte, this.ruimteOnder];
+    slices: Slice[] = [this.notatie, this.grootte, this.kleur, this.regelhoogte, this.ruimteOnder];
 }
 
 class ToelichtingCard extends Card {
-    toon = new formattingSettings.ToggleSwitch({ name: "toon", displayName: "Tonen", value: true });
-    grootte = num("grootte", "Tekstgrootte (pt)", 9);
-    kleur = col("kleur", "Kleur", "#525252");
-    regelhoogte = num("regelhoogte", "Regelhoogte (x)", 1.2);
+    toon = h.schakel("toon", "Tonen", true);
+    tekst = h.tekst("tekst", "Vaste tekst (als er geen measure is)", "");
+    grootte = h.num("grootte", "Tekstgrootte (pt)", 9);
+    kleur = h.kleur("kleur", "Kleur", "#525252");
+    regelhoogte = h.num("regelhoogte", "Regelhoogte (x)", 1.2);
+    regels = h.num("regels", "Aantal regels (ruimte blijft gereserveerd)", 2);
     name = "toelichting";
     displayName = "Toelichting";
-    slices: Slice[] = [this.toon, this.grootte, this.kleur, this.regelhoogte];
+    slices: Slice[] = [this.toon, this.tekst, this.grootte, this.kleur, this.regelhoogte, this.regels];
 }
 
 class LettertypeCard extends Card {
-    familie = new formattingSettings.TextInput({ name: "familie", displayName: "Lettertype", value: "Montserrat", placeholder: "Montserrat" });
+    familie = h.tekst("familie", "Lettertype", "Montserrat");
     name = "lettertype";
     displayName = "Lettertype";
     slices: Slice[] = [this.familie];

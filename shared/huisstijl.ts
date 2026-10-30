@@ -76,3 +76,49 @@ export function instellingenHelpers(fs: any) {
             new fs.ItemDropdown({ name, displayName, items, value: items.find(i => i.value === waarde) || items[0] })
     };
 }
+
+/** Seconden naar u:mm:ss */
+export function hms(sec: any): string {
+    if (typeof sec !== "number" || !isFinite(sec)) { return ""; }
+    const s = Math.round(sec);
+    return `${Math.floor(s / 3600)}:${String(Math.floor((s % 3600) / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
+}
+
+/**
+ * Formatteert met een zelf ingetypte notatiecode; leeg = formaat van het veld (terugval).
+ * Getallen: 0 | 0.0 | 0.00 | #,0 (duizendtallen) | 0% | 0.0% ; duur in seconden: m:ss | mm:ss | h:mm:ss | uu:mm:ss
+ * Datums/tijden: bijvoorbeeld dd-MM-yyyy, dd-MM, HH:mm
+ */
+export function formatCode(waarde: any, code?: string, terugval?: string): string {
+    const c = (code || "").trim();
+    if (!c) { return formatteer(waarde, terugval); }
+    if (waarde === null || waarde === undefined) { return ""; }
+    const l = c.toLowerCase();
+    if (typeof waarde === "number") {
+        if (l === "m:ss" || l === "mm:ss") { return mmss(waarde); }
+        if (l === "h:mm:ss" || l === "hh:mm:ss" || l === "u:mm:ss" || l === "uu:mm:ss") { return hms(waarde); }
+        const dec = (c.split(".")[1] || "").replace(/[^0#]/g, "").length;
+        const pct = c.indexOf("%") >= 0;
+        return (pct ? waarde * 100 : waarde).toLocaleString("nl-NL", {
+            minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: c.indexOf(",") >= 0
+        }) + (pct ? "%" : "");
+    }
+    if (waarde instanceof Date) {
+        const p = (n: number) => String(n).padStart(2, "0");
+        return c.replace(/yyyy|yy|MM|dd|HH|mm|ss/g, t => ({
+            yyyy: String(waarde.getFullYear()), yy: String(waarde.getFullYear()).slice(2), MM: p(waarde.getMonth() + 1),
+            dd: p(waarde.getDate()), HH: p(waarde.getHours()), mm: p(waarde.getMinutes()), ss: p(waarde.getSeconds())
+        } as any)[t]);
+    }
+    return String(waarde);
+}
+
+/** "Naam=code; Naam2=code2" naar een opzoeklijst (namen in kleine letters). */
+export function leesNotaties(tekst: string): { [naam: string]: string } {
+    const uit: { [naam: string]: string } = {};
+    (tekst || "").split(/[;\n]/).forEach(p => {
+        const i = p.indexOf("=");
+        if (i > 0) { uit[p.substring(0, i).trim().toLowerCase()] = p.substring(i + 1).trim(); }
+    });
+    return uit;
+}

@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "kleinekaart",
+    "displayName": "Kleine kaart 3CX",
+    "guid": "kleinekaart3cx8d2f4a6c0e1b4c7d9e1f3a5b7c9d1e3f",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "Kleine kaart (label en toelichting links, waarde rechts) in de huisstijl",
+    "supportUrl": "https://www.bevico.nl",
+    "gitHubUrl": ""
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "Bevico",
+    "email": "nathanvh95@gmail.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.0.0"
+}

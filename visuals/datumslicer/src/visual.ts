@@ -21,6 +21,10 @@ const plusDagen = (ymd: string, n: number): string => {
     const t = new Date(Date.UTC(y, m - 1, d + n));
     return `${t.getUTCFullYear()}-${pad(t.getUTCMonth() + 1)}-${pad(t.getUTCDate())}`;
 };
+const dagenTussen = (a: string, b: string): number => {
+    const x = a.split("-").map(Number), y = b.split("-").map(Number);
+    return Math.round((Date.UTC(y[0], y[1] - 1, y[2]) - Date.UTC(x[0], x[1] - 1, x[2])) / 86400000);
+};
 const iso = (ymd: string) => `${ymd}T00:00:00.000Z`;
 
 export class Visual implements IVisual {
@@ -80,7 +84,8 @@ export class Visual implements IVisual {
 
     private teken() {
         const s = this.fs;
-        const dag = String(s.algemeen.modus.value.value) === "dag";
+        const modus = String(s.algemeen.modus.value.value);
+        const dag = modus === "dag";
         this.root.style.fontFamily = fontStack(s.lettertype.familie.value);
         this.lbl.style.display = s.label.toon.value ? "block" : "none";
         this.lbl.textContent = s.label.tekst.value || this.veldnaam;
@@ -127,11 +132,26 @@ export class Visual implements IVisual {
                 knop("Vandaag", () => this.zet(vandaag, vandaag), huidig === vandaag);
                 knop("Gisteren", () => this.zet(plusDagen(vandaag, -1), plusDagen(vandaag, -1)), huidig === plusDagen(vandaag, -1));
             }
-        } else {
+        } else if (modus === "bereik") {
             veld(this.start, "Van", v => this.zet(v, this.eind && this.eind >= v ? this.eind : v));
             veld(this.eind, "Tot en met", v => this.zet(this.start && this.start <= v ? this.start : v, v));
             if (s.algemeen.snelkeuze.value) {
                 knop("Vandaag", () => this.zet(vandaag, vandaag), this.start === vandaag && this.eind === vandaag);
+                knop("7 dagen", () => this.zet(plusDagen(vandaag, -6), vandaag), this.start === plusDagen(vandaag, -6) && this.eind === vandaag);
+                knop("30 dagen", () => this.zet(plusDagen(vandaag, -29), vandaag), this.start === plusDagen(vandaag, -29) && this.eind === vandaag);
+                knop("Alles", () => this.zet("", ""), !this.start && !this.eind);
+            }
+        } else {
+            // combi: vorige/volgende verschuift de hele periode met zijn eigen lengte
+            const lengte = this.start && this.eind ? Math.max(1, dagenTussen(this.start, this.eind) + 1) : 1;
+            const basis = this.start || vandaag;
+            knop("‹", () => this.zet(plusDagen(basis, -lengte), plusDagen(this.eind || basis, -lengte)), false, true);
+            veld(this.start, "Van", v => this.zet(v, this.eind && this.eind >= v ? this.eind : v));
+            veld(this.eind, "Tot en met", v => this.zet(this.start && this.start <= v ? this.start : v, v));
+            knop("›", () => this.zet(plusDagen(basis, lengte), plusDagen(this.eind || basis, lengte)), false, true);
+            if (s.algemeen.snelkeuze.value) {
+                knop("Vandaag", () => this.zet(vandaag, vandaag), this.start === vandaag && this.eind === vandaag);
+                knop("Gisteren", () => this.zet(plusDagen(vandaag, -1), plusDagen(vandaag, -1)), this.start === plusDagen(vandaag, -1) && this.eind === plusDagen(vandaag, -1));
                 knop("7 dagen", () => this.zet(plusDagen(vandaag, -6), vandaag), this.start === plusDagen(vandaag, -6) && this.eind === vandaag);
                 knop("30 dagen", () => this.zet(plusDagen(vandaag, -29), vandaag), this.start === plusDagen(vandaag, -29) && this.eind === vandaag);
                 knop("Alles", () => this.zet("", ""), !this.start && !this.eind);

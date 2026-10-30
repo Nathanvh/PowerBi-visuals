@@ -29,9 +29,10 @@ class CellenCard extends Card {
     ruimte = h.num("ruimte", "Ruimte tussen cellen (px)", 4);
     radius = h.num("radius", "Hoekradius (px)", 4);
     nullAlsLeeg = h.schakel("nullAlsLeeg", "0 tonen als leeg", false);
+    notatie = h.tekst("notatie", "Notatie (leeg = formaat van het veld; bijv. 0, 0.0, 0%, m:ss)", "");
     name = "cellen";
     displayName = "Cellen";
-    slices: Slice[] = [this.toonWaarden, this.grootte, this.vet, this.ruimte, this.radius, this.nullAlsLeeg];
+    slices: Slice[] = [this.toonWaarden, this.grootte, this.vet, this.ruimte, this.radius, this.nullAlsLeeg, this.notatie];
 }
 
 class KoppenCard extends Card {

@@ -126,6 +126,12 @@
           "type": {
             "bool": true
           }
+        },
+        "notatie": {
+          "displayName": "Notatie (leeg = formaat van het veld; bijv. 0, 0.0, 0%, m:ss)",
+          "type": {
+            "text": true
+          }
         }
       }
     },
@@ -232,7 +238,7 @@
             "in": "kolom"
           },
           "dataReductionAlgorithm": {
-            "window": {
+            "top": {
               "count": 100
             }
           }

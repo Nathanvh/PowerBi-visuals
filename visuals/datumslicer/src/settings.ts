@@ -10,7 +10,7 @@ import Slice = formattingSettings.Slice;
 import Model = formattingSettings.Model;
 
 class AlgemeenCard extends Card {
-    modus = h.keuze("modus", "Modus", [{"value": "dag", "displayName": "Eén dag"}, {"value": "bereik", "displayName": "Bereik (van - tot)"}], "dag");
+    modus = h.keuze("modus", "Modus", [{"value":"combi","displayName":"Van - tot met vorige/volgende (aanbevolen)"},{"value":"bereik","displayName":"Bereik (van - tot)"},{"value":"dag","displayName":"Eén dag"}], "combi");
     snelkeuze = h.schakel("snelkeuze", "Snelkeuzes tonen", true);
     name = "algemeen";
     displayName = "Algemeen";

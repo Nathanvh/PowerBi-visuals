@@ -11,9 +11,10 @@ Gedeelde huisstijlcode (kleuren, opmaak, m:ss, kleurverloop) staat in `shared/hu
 | Map | Visual in Power BI | Gebruik in de dashboards |
 |---|---|---|
 | `visuals/paginatitel` | Paginatitel 3CX | Titel, ondertitel en oranje lijn bovenaan elke pagina (1232 x 80) |
-| `visuals/kpikaart` | KPI-kaart 3CX | De grote kaarten (165 x 108) en, met Indeling *Compact*, de kleine kaarten (299 x 64) |
+| `visuals/kpikaart` | KPI-kaart 3CX | De grote kaarten (165 x 108); vaste ruimte voor label en toelichting, zodat alle kaarten gelijk staan |
+| `visuals/kleinekaart` | Kleine kaart 3CX | De kleine kaarten (299 x 64): label en toelichting links, waarde rechts |
 | `visuals/slicer` | Slicer tegels 3CX | Entiteit, Wachtrij, Weekdag, Medewerker (tegels, meerdere selecteren, Alles-tegel) |
-| `visuals/datumslicer` | Datumslicer 3CX | Datum: *Eén dag* (met vorige/volgende, dashboard 2) of *Bereik* (dashboard 1) |
+| `visuals/datumslicer` | Datumslicer 3CX | Datum: *Van - tot met vorige/volgende* (standaard, dashboard 1), *Bereik* of *Eén dag* (dashboard 2); Algemeen, Modus |
 | `visuals/grafiek` | Kolom- en lijngrafiek 3CX | Gestapelde kolommen per dag, lijn voor wachttijd, wachtklasse-grafiek |
 | `visuals/heatmap` | Heatmap 3CX | Weekdag x uur (wachtrij) en medewerker x uur; cellen vullen de hele visual |
 | `visuals/tabel` | Tabel 3CX | Gemiste gesprekken, opnamegedrag (databalk), detailtabel, per-wachtrij-tabel met totaalrij |
@@ -23,11 +24,16 @@ Niet vervangen (blijft standaard Power BI): de uitklapbare matrix "Wie nam wat o
 ### Velden per visual
 
 - **Paginatitel:** *Titel* en *Ondertitel* als tekst-measure, of vaste tekst bij Format visual.
-- **KPI-kaart:** *Waarde* (measure), *Toelichting* (tekst-measure, optioneel), *Accentkleur* (measure met hexcode, optioneel).
+- **KPI-kaart en Kleine kaart:** *Waarde* (measure), *Toelichting* (tekst-measure, optioneel; of een vaste tekst typen bij Format visual), *Accentkleur* (measure met hexcode, optioneel).
 - **Slicer tegels / Datumslicer:** één veld. De visual stuurt zelf een filter naar de andere visuals op de pagina.
 - **Kolom- en lijngrafiek:** *Categorie (as)*, *Kolommen* (één of meer measures, bijvoorbeeld Opgenomen, Terugbel, Gemist), *Lijn* (één measure, komt op een tweede as als er ook kolommen zijn).
 - **Heatmap:** *Rijen*, *Kolommen*, *Waarde*.
 - **Tabel:** alle kolommen in *Kolommen*. Speciale kolommen via Format visual, *Speciale kolommen* (m:ss, databalk, statuskleuren).
+
+**Notatie van waarden:** elke visual gebruikt het formaat van het veld. Wil je dat overschrijven, typ dan een notatiecode:
+`0`, `0.0`, `0.00`, `#,0` (duizendtallen), `0%`, `0.0%`; duur in seconden: `m:ss` of `h:mm:ss`; datums: `dd-MM-yyyy`, `dd-MM`, `HH:mm`.
+Kaart: *Waarde, Notatie*. Heatmap: *Cellen, Notatie*. Grafiek: *Kolommen/Lijn, Notatie* en *Assen, Notatie categorieën*.
+Tabel: *Speciale kolommen, Notatie per kolom* in de vorm `Gesprekken=#,0; Opname %=0.0%`. Kolomnamen zijn de namen in de kolomkop (hernoem het veld in het veldenvak als je een andere naam wilt).
 
 Bekende beperkingen: een custom visual kan niet buiten zijn eigen vlak tekenen, dus slicers zijn tegels en geen uitklapmenu.
 Interactie (klikken in een grafiek om andere visuals te filteren) en tooltips van Power BI zelf zitten er niet in; wel eenvoudige hover-tekst.

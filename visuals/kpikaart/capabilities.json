@@ -58,10 +58,19 @@
             "numeric": true
           }
         },
-        "afbreken": {
-          "displayName": "Tekst afbreken",
+        "indeling": {
+          "displayName": "Indeling",
           "type": {
-            "bool": true
+            "enumeration": [
+              {
+                "value": "standaard",
+                "displayName": "Standaard (onder elkaar)"
+              },
+              {
+                "value": "compact",
+                "displayName": "Compact (waarde rechts)"
+              }
+            ]
           }
         },
         "uitlijning": {
@@ -79,21 +88,6 @@
               {
                 "value": "right",
                 "displayName": "Rechts"
-              }
-            ]
-          }
-        },
-        "indeling": {
-          "displayName": "Indeling",
-          "type": {
-            "enumeration": [
-              {
-                "value": "standaard",
-                "displayName": "Standaard (onder elkaar)"
-              },
-              {
-                "value": "compact",
-                "displayName": "Compact (waarde rechts)"
               }
             ]
           }
@@ -131,7 +125,7 @@
       "displayName": "Label",
       "properties": {
         "tekst": {
-          "displayName": "Tekst",
+          "displayName": "Tekst (leeg = veldnaam)",
           "type": {
             "text": true
           }
@@ -169,12 +163,24 @@
           "type": {
             "numeric": true
           }
+        },
+        "regels": {
+          "displayName": "Aantal regels (ruimte blijft gereserveerd)",
+          "type": {
+            "numeric": true
+          }
         }
       }
     },
     "waarde": {
       "displayName": "Waarde",
       "properties": {
+        "notatie": {
+          "displayName": "Notatie (leeg = formaat van het veld)",
+          "type": {
+            "text": true
+          }
+        },
         "grootte": {
           "displayName": "Tekstgrootte (pt)",
           "type": {
@@ -214,6 +220,12 @@
             "bool": true
           }
         },
+        "tekst": {
+          "displayName": "Vaste tekst (als er geen measure is)",
+          "type": {
+            "text": true
+          }
+        },
         "grootte": {
           "displayName": "Tekstgrootte (pt)",
           "type": {
@@ -232,6 +244,12 @@
         },
         "regelhoogte": {
           "displayName": "Regelhoogte (x)",
+          "type": {
+            "numeric": true
+          }
+        },
+        "regels": {
+          "displayName": "Aantal regels (ruimte blijft gereserveerd)",
           "type": {
             "numeric": true
           }

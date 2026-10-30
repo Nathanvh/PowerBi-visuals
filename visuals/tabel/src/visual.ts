@@ -7,7 +7,7 @@ import IVisual = powerbi.extensibility.visual.IVisual;
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import { VisualFormattingSettingsModel } from "./settings";
-import { fontStack, formatteer, mmss, isHex, escapeHtml } from "../../../shared/huisstijl";
+import { fontStack, formatteer, formatCode, leesNotaties, mmss, isHex, escapeHtml } from "../../../shared/huisstijl";
 
 const lijstVan = (t: string) => (t || "").split(",").map(x => x.trim().toLowerCase()).filter(x => x);
 
@@ -48,6 +48,10 @@ export class Visual implements IVisual {
         const kol: any[] = t.columns;
         const isGetal = (c: any) => !!(c.type && (c.type.numeric || c.type.integer));
         const mmssKol = new Set(lijstVan(s.opmaak.mmss.value));
+        const notaties = leesNotaties(s.opmaak.notaties.value);
+        // een kolom matcht op de naam in de kop en op de oorspronkelijke veldnaam
+        const namenVan = (c: any): string[] => [String(c.displayName).toLowerCase(), String(c.queryName || "").split(".").pop()!.toLowerCase()];
+        const inLijst = (c: any, set: Set<string>) => namenVan(c).some(n => set.has(n));
         const zonderTotaal = new Set(lijstVan(s.totaal.uitsluiten.value));
         const databalkNaam = (s.opmaak.databalk.value || "").trim().toLowerCase();
         const status: { [k: string]: string } = {};
@@ -70,7 +74,9 @@ export class Visual implements IVisual {
 
         const maakTekst = (c: any, v: any): string => {
             if (v === null || v === undefined) { return ""; }
-            if (mmssKol.has(String(c.displayName).toLowerCase()) && typeof v === "number") { return mmss(v); }
+            const code = namenVan(c).map(n => notaties[n]).find(x => x);
+            if (code) { return formatCode(v, code, c.format); }
+            if (inLijst(c, mmssKol) && typeof v === "number") { return mmss(v); }
             if (v instanceof Date) {
                 const heeftTijd = v.getHours() + v.getMinutes() + v.getSeconds() > 0;
                 return heeftTijd ? v.toLocaleString("nl-NL", { dateStyle: "short", timeStyle: "short" } as any) : v.toLocaleDateString("nl-NL");
@@ -101,7 +107,7 @@ export class Visual implements IVisual {
         });
 
         const maxBalk = (() => {
-            const bi = kol.findIndex(c => String(c.displayName).toLowerCase() === databalkNaam);
+            const bi = kol.findIndex(c => namenVan(c).indexOf(databalkNaam) >= 0);
             if (bi < 0) { return { bi, max: 0 }; }
             return { bi, max: rijen.reduce((a, r) => typeof r[bi] === "number" ? Math.max(a, r[bi]) : a, 0) };
         })();
@@ -141,7 +147,7 @@ export class Visual implements IVisual {
                 td.style.padding = celPad;
                 td.style.borderTop = `${s.kop.lijnDikte.value}px solid ${s.kop.lijnKleur.value.value}`;
                 if (i === 0) { td.textContent = s.totaal.label.value || "Totaal"; return; }
-                if (isGetal(c) && !zonderTotaal.has(String(c.displayName).toLowerCase()) && String(c.format || "").indexOf("%") < 0) {
+                if (isGetal(c) && !inLijst(c, zonderTotaal) && String(c.format || "").indexOf("%") < 0) {
                     const som = rijen.reduce((a, row) => typeof row[i] === "number" ? a + row[i] : a, 0);
                     td.textContent = maakTekst(c, som);
                 }

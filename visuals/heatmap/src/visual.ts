@@ -7,7 +7,7 @@ import IVisual = powerbi.extensibility.visual.IVisual;
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import { VisualFormattingSettingsModel } from "./settings";
-import { fontStack, formatteer, verloop, escapeHtml } from "../../../shared/huisstijl";
+import { fontStack, formatteer, formatCode, verloop, escapeHtml } from "../../../shared/huisstijl";
 
 export class Visual implements IVisual {
     private events: powerbi.extensibility.IVisualEventService;
@@ -80,8 +80,8 @@ export class Visual implements IVisual {
                         const t = ((v as number) - min) / bereik;
                         e.style.background = verloop(s.kleuren.laag.value.value, s.kleuren.midden.value.value, s.kleuren.hoog.value.value, t);
                         e.style.color = t > s.kleuren.drempel.value ? s.kleuren.tekstLicht.value.value : s.kleuren.tekstDonker.value.value;
-                        if (s.cellen.toonWaarden.value) { e.textContent = formatteer(v, formaat); }
-                        e.title = `${formatteer(r.value)} - ${formatteer(k.value)}: ${formatteer(v, formaat)}`;
+                        if (s.cellen.toonWaarden.value) { e.textContent = formatCode(v, s.cellen.notatie.value, formaat); }
+                        e.title = `${formatteer(r.value)} - ${formatteer(k.value)}: ${formatCode(v, s.cellen.notatie.value, formaat)}`;
                     }
                     raster.appendChild(e);
                 });
@@ -94,7 +94,7 @@ export class Visual implements IVisual {
                 l.style.fontSize = `${s.legenda.grootte.value}pt`;
                 l.style.color = s.legenda.kleur.value.value;
                 const balk = `<div class="balk" style="background: linear-gradient(90deg, ${s.kleuren.laag.value.value}, ${s.kleuren.midden.value.value}, ${s.kleuren.hoog.value.value})"></div>`;
-                l.innerHTML = `<span>${escapeHtml(formatteer(min, formaat))}</span>${balk}<span>${escapeHtml(formatteer(max, formaat))}</span>`;
+                l.innerHTML = `<span>${escapeHtml(formatCode(min, s.cellen.notatie.value, formaat))}</span>${balk}<span>${escapeHtml(formatCode(max, s.cellen.notatie.value, formaat))}</span>`;
                 this.root.appendChild(l);
             }
             this.events.renderingFinished(options);

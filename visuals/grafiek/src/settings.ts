@@ -22,9 +22,10 @@ class KolommenCard extends Card {
     radius = h.num("radius", "Hoekradius (px)", 2);
     labels = h.schakel("labels", "Waarden tonen", false);
     mmss = h.schakel("mmss", "Waarden als m:ss (seconden)", false);
+    notatie = h.tekst("notatie", "Notatie (leeg = formaat van het veld; bijv. 0, 0.0, #,0, 0%, m:ss)", "");
     name = "kolommen";
     displayName = "Kolommen";
-    slices: Slice[] = [this.breedte, this.radius, this.labels, this.mmss];
+    slices: Slice[] = [this.breedte, this.radius, this.labels, this.mmss, this.notatie];
 }
 
 class LijnCard extends Card {
@@ -33,9 +34,10 @@ class LijnCard extends Card {
     punten = h.schakel("punten", "Punten tonen", true);
     labels = h.schakel("labels", "Waarden tonen", false);
     mmss = h.schakel("mmss", "Waarden als m:ss (seconden)", false);
+    notatie = h.tekst("notatie", "Notatie (leeg = formaat van het veld; bijv. 0, 0.0, 0%, m:ss)", "");
     name = "lijn";
     displayName = "Lijn";
-    slices: Slice[] = [this.kleur, this.dikte, this.punten, this.labels, this.mmss];
+    slices: Slice[] = [this.kleur, this.dikte, this.punten, this.labels, this.mmss, this.notatie];
 }
 
 class ReeksCard extends Card {
@@ -56,9 +58,10 @@ class AssenCard extends Card {
     raster = h.schakel("raster", "Rasterlijnen tonen", true);
     rasterKleur = h.kleur("rasterKleur", "Kleur rasterlijnen", "#E5E5E5");
     toonY = h.schakel("toonY", "Waardeas tonen", true);
+    catNotatie = h.tekst("catNotatie", "Notatie categorieën bij datums (bijv. dd-MM, dd-MM-yyyy)", "dd-MM");
     name = "assen";
     displayName = "Assen";
-    slices: Slice[] = [this.grootte, this.kleur, this.raster, this.rasterKleur, this.toonY];
+    slices: Slice[] = [this.grootte, this.kleur, this.raster, this.rasterKleur, this.toonY, this.catNotatie];
 }
 
 class LettertypeCard extends Card {

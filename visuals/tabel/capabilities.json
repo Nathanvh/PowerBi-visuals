@@ -131,7 +131,7 @@
           }
         },
         "uitsluiten": {
-          "displayName": "Kolommen zonder totaal (namen, komma; %-kolommen sowieso niet)",
+          "displayName": "Kolommen zonder totaal: namen van de kolomkoppen, met komma",
           "type": {
             "text": true
           }
@@ -142,13 +142,13 @@
       "displayName": "Speciale kolommen",
       "properties": {
         "mmss": {
-          "displayName": "Kolommen als m:ss (namen, komma; waarde in seconden)",
+          "displayName": "Kolommen als m:ss: namen van de kolomkoppen, met komma (waarde in seconden)",
           "type": {
             "text": true
           }
         },
         "databalk": {
-          "displayName": "Kolom met databalk (naam)",
+          "displayName": "Kolom met databalk: naam van de kolomkop",
           "type": {
             "text": true
           }
@@ -165,6 +165,12 @@
         },
         "statusKleuren": {
           "displayName": "Statuskleuren (Tekst=#kleur; gescheiden door ;)",
+          "type": {
+            "text": true
+          }
+        },
+        "notaties": {
+          "displayName": "Notatie per kolom: Kolomnaam=code; Kolomnaam2=code (bijv. Gesprekken=#,0; Opname %=0.0%)",
           "type": {
             "text": true
           }

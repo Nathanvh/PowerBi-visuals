@@ -7,7 +7,7 @@ import IVisual = powerbi.extensibility.visual.IVisual;
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import { VisualFormattingSettingsModel } from "./settings";
-import { fontStack, formatteer, mmss, escapeHtml } from "../../../shared/huisstijl";
+import { fontStack, formatteer, formatCode, mmss, escapeHtml } from "../../../shared/huisstijl";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -65,7 +65,7 @@ export class Visual implements IVisual {
         const tekstKleur = s.assen.kleur.value.value;
         const kleuren = [s.reeks.k1, s.reeks.k2, s.reeks.k3, s.reeks.k4, s.reeks.k5, s.reeks.k6].map(k => k.value.value);
         const n = cat.values.length;
-        const labelVan = (v: any): string => v instanceof Date ? `${pad(v.getDate())}-${pad(v.getMonth() + 1)}` : formatteer(v, cat.source.format);
+        const labelVan = (v: any): string => v instanceof Date ? formatCode(v, s.assen.catNotatie.value || "dd-MM") : formatteer(v, cat.source.format);
         const labels = cat.values.map(labelVan);
 
         // Legenda
@@ -99,8 +99,8 @@ export class Visual implements IVisual {
         const linkerSchaal = mooieSchaal(kolommen.length ? maxKolom : maxLijn);
         const rechterSchaal = beide ? mooieSchaal(maxLijn) : null;
 
-        const fmtKolom = (v: number) => s.kolommen.mmss.value ? mmss(v) : formatteer(v, kolommen[0] && kolommen[0].source.format);
-        const fmtLijn = (v: number) => s.lijn.mmss.value ? mmss(v) : formatteer(v, lijnKol && lijnKol.source.format);
+        const fmtKolom = (v: number) => s.kolommen.mmss.value ? mmss(v) : formatCode(v, s.kolommen.notatie.value, kolommen[0] && kolommen[0].source.format);
+        const fmtLijn = (v: number) => s.lijn.mmss.value ? mmss(v) : formatCode(v, s.lijn.notatie.value, lijnKol && lijnKol.source.format);
         const fmtLinks = (v: number) => kolommen.length ? fmtKolom(v) : fmtLijn(v);
 
         const tekstBreedte = (t: string) => t.length * fpx * 0.62;

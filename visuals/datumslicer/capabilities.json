@@ -15,12 +15,16 @@
           "type": {
             "enumeration": [
               {
-                "value": "dag",
-                "displayName": "Eén dag"
+                "value": "combi",
+                "displayName": "Van - tot met vorige/volgende (aanbevolen)"
               },
               {
                 "value": "bereik",
                 "displayName": "Bereik (van - tot)"
+              },
+              {
+                "value": "dag",
+                "displayName": "Eén dag"
               }
             ]
           }

@@ -37,20 +37,21 @@ class KopCard extends Card {
 class TotaalCard extends Card {
     toon = h.schakel("toon", "Tonen", false);
     label = h.tekst("label", "Label", "Totaal");
-    uitsluiten = h.tekst("uitsluiten", "Kolommen zonder totaal (namen, komma; %-kolommen sowieso niet)", "");
+    uitsluiten = h.tekst("uitsluiten", "Kolommen zonder totaal: namen van de kolomkoppen, met komma", "");
     name = "totaal";
     displayName = "Totaalrij";
     slices: Slice[] = [this.toon, this.label, this.uitsluiten];
 }
 
 class OpmaakCard extends Card {
-    mmss = h.tekst("mmss", "Kolommen als m:ss (namen, komma; waarde in seconden)", "");
-    databalk = h.tekst("databalk", "Kolom met databalk (naam)", "");
+    mmss = h.tekst("mmss", "Kolommen als m:ss: namen van de kolomkoppen, met komma (waarde in seconden)", "");
+    databalk = h.tekst("databalk", "Kolom met databalk: naam van de kolomkop", "");
     databalkKleur = h.kleur("databalkKleur", "Kleur databalk", "#9fb4ff");
     statusKleuren = h.tekst("statusKleuren", "Statuskleuren (Tekst=#kleur; gescheiden door ;)", "Gemist=#dd7d32;Beantwoord=#111987;Terugbelverzoek=#31959b");
+    notaties = h.tekst("notaties", "Notatie per kolom: Kolomnaam=code; Kolomnaam2=code (bijv. Gesprekken=#,0; Opname %=0.0%)", "");
     name = "opmaak";
     displayName = "Speciale kolommen";
-    slices: Slice[] = [this.mmss, this.databalk, this.databalkKleur, this.statusKleuren];
+    slices: Slice[] = [this.mmss, this.databalk, this.databalkKleur, this.statusKleuren, this.notaties];
 }
 
 class LettertypeCard extends Card {
